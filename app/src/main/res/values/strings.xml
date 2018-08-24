@@ -3,4 +3,7 @@
     <string name="take_the_cultured_quiz">Take the Cultured Quiz!</string>
     <string name="quiz">Quiz!</string>
     <string name="title_activity_question">Question</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="question">Question</string>
 </resources>
