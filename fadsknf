@@ -1,0 +1,35 @@
+[33mcommit 2caeae4f0d4a28d60d62c06067d5817ce73b245c[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Daniel Truong <ddtruong06@gmail.com>
+Date:   Fri Aug 24 15:15:55 2018 -0700
+
+    Fixed Radio Group so only 1 answer can be chosen
+
+[33mcommit 8f27c834dfc5fbc8bd6ccb7e2a00ac6d72564bee[m
+Author: Daniel Truong <ddtruong06@gmail.com>
+Date:   Fri Aug 24 15:10:55 2018 -0700
+
+    Button leads to Trivia activity
+
+[33mcommit 6811f37e31a43f0da98b76b62e05a70e5b6f3582[m
+Author: Daniel Truong <ddtruong06@gmail.com>
+Date:   Fri Aug 24 13:18:33 2018 -0700
+
+    Created question and multiple choice radio buttons
+
+[33mcommit 41c41a2c5ac29211488ef783302f4cabe423e1b1[m
+Author: Daniel Truong <ddtruong06@gmail.com>
+Date:   Fri Aug 24 12:50:00 2018 -0700
+
+    Created main interface for trivia game
+
+[33mcommit b381ba4097cbc8babfccbee65f03d121af31a9f7[m
+Author: Daniel Truong <ddtruong06@gmail.com>
+Date:   Fri Aug 24 01:15:43 2018 -0700
+
+    Added Buttons
+
+[33mcommit 469aecf11e90f6353a9446f46b13a808b8488f76[m
+Author: Daniel Truong <ddtruong06@gmail.com>
+Date:   Thu Aug 23 21:52:48 2018 -0700
+
+    FIrst initial commit
