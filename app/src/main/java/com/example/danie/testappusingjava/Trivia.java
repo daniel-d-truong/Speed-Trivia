@@ -2,6 +2,8 @@ package com.example.danie.testappusingjava;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 
 import javax.xml.namespace.QName;
 
+import static android.support.constraint.Constraints.TAG;
 
 
 public class Trivia extends Activity {
@@ -31,6 +34,11 @@ public class Trivia extends Activity {
                     changeQuestion();
                     changeChoices();
                     resetRadio();
+                }
+                else { //creates pop-up telling user to make a choice
+                    Log.d(TAG, "Else Statement has been Run.");
+                    Snackbar.make(findViewById(R.id.myLayout), R.string.make_choice, Snackbar.LENGTH_SHORT)
+                            .show();
                 }
             }
         });
