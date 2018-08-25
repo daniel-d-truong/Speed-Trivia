@@ -36,7 +36,7 @@
         android:text="@string/quiz"
         android:visibility="visible"
         android:background="#4d88ff"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

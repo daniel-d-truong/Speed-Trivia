@@ -1,6 +1,7 @@
 package com.example.danie.testappusingjava;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -27,6 +28,9 @@ public class Trivia extends Activity {
 
         choices = (RadioGroup) findViewById (R.id.multiple_choice);
         btn = (Button) findViewById(R.id.submit);
+        if (choices.getCheckedRadioButtonId() != -1){
+            btn.setBackgroundColor(Color.BLUE);
+        }
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
