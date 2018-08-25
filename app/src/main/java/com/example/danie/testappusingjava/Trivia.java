@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import javax.xml.namespace.QName;
@@ -26,6 +27,7 @@ public class Trivia extends Activity {
             public void onClick(View v) {
                 changeQuestion();
                 changeChoices();
+                resetRadio();
             }
         });
     }
@@ -44,5 +46,8 @@ public class Trivia extends Activity {
         System.out.println(0);
     }
 
-
+    private void resetRadio() {
+        RadioGroup choices = (RadioGroup) findViewById (R.id.multiple_choice);
+        choices.clearCheck();
+    }
 }
