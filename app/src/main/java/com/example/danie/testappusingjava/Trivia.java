@@ -14,6 +14,7 @@ import javax.xml.namespace.QName;
 public class Trivia extends Activity {
 
     private Button btn;
+    private RadioGroup choices;
     private int count = 0;
 
     @Override
@@ -21,13 +22,16 @@ public class Trivia extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trivia);
 
+        choices = (RadioGroup) findViewById (R.id.multiple_choice);
         btn = (Button) findViewById(R.id.submit);
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                changeQuestion();
-                changeChoices();
-                resetRadio();
+                if (choices.getCheckedRadioButtonId() != -1) {
+                    changeQuestion();
+                    changeChoices();
+                    resetRadio();
+                }
             }
         });
     }
@@ -47,7 +51,6 @@ public class Trivia extends Activity {
     }
 
     private void resetRadio() {
-        RadioGroup choices = (RadioGroup) findViewById (R.id.multiple_choice);
         choices.clearCheck();
     }
 }
