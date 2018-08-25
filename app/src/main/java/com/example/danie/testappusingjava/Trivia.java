@@ -28,9 +28,21 @@ public class Trivia extends Activity {
 
         choices = (RadioGroup) findViewById (R.id.multiple_choice);
         btn = (Button) findViewById(R.id.submit);
-        if (choices.getCheckedRadioButtonId() != -1){
-            btn.setBackgroundColor(Color.BLUE);
-        }
+        Log.d(TAG, "Trivia has been created");
+
+        choices.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                Log.d(TAG, "ON Click has been run");
+                btn.setBackgroundColor(Color.BLUE);
+
+            }
+        });
+            //THIS NEEDS TO BE FIXED
+
+
+
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
