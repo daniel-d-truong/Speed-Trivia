@@ -39,11 +39,11 @@ public class Trivia extends Activity {
     private void changeQuestion(){
         count++;
 
-        TextView question = (TextView) findViewById(R.id.question);
+        TextView q = (TextView) findViewById(R.id.question2);
         String message = getString(R.string.question);
         message+=" "+count;
 
-        question.setText(message);
+        q.setText(message);
     }
 
     private void changeChoices() {
