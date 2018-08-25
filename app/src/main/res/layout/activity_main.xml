@@ -35,6 +35,8 @@
         android:layout_marginTop="8dp"
         android:text="@string/quiz"
         android:visibility="visible"
+        android:background="#4d88ff"
+        android:textColor="@android:color/whi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
