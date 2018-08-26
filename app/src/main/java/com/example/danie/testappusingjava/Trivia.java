@@ -33,15 +33,11 @@ public class Trivia extends Activity {
         choices.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-
                 Log.d(TAG, "ON Click has been run");
-                btn.setBackgroundColor(Color.parseColor("#4d88ff"));
+                btn.setBackgroundColor(getResources().getColor(R.color.buttonColor)); //sets background color to what is set in the colors.xml
 
             }
         });
-            //THIS NEEDS TO BE FIXED
-
-
 
         btn.setOnClickListener(new View.OnClickListener(){
             @Override

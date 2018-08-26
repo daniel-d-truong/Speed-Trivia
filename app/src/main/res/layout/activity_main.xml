@@ -35,7 +35,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/quiz"
         android:visibility="visible"
-        android:background="#4d88ff"
+        android:background="@color/buttonColor"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
