@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btn = (Button) findViewById(R.id.button_quiz);
+
+        //OnClickListener for when user taps the button
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -23,9 +25,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //method to lead to trivia activity
     public void openTriviaActivity(){
-        Intent in = new Intent (this, Trivia.class);
-        startActivity(in);
+        Intent in = new Intent (this, Trivia.class); //must create an Intent object
+        startActivity(in); //pass the Intent object into the startActivity(Intent) class in order to actually start the activity
     }
 
 
