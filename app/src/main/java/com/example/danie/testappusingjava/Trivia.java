@@ -35,7 +35,7 @@ public class Trivia extends Activity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
                 Log.d(TAG, "ON Click has been run");
-                btn.setBackgroundColor(Color.BLUE);
+                btn.setBackgroundColor(Color.parseColor("#4d88ff"));
 
             }
         });
@@ -76,5 +76,6 @@ public class Trivia extends Activity {
 
     private void resetRadio() {
         choices.clearCheck();
+        btn.setBackgroundResource(android.R.drawable.btn_default);
     }
 }
