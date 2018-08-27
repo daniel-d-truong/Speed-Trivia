@@ -13,7 +13,7 @@
     <string name="next_question">Next Question</string>
     <string name="make_choice">You must PICK ONE answer! </string>
     <string name="title_activity_bottom_navigate">BottomNavigate</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_left">Home</string>
+    <string name="title_middle">Quiz!</string>
+    <string name="title_right">Notifications</string>
 </resources>
