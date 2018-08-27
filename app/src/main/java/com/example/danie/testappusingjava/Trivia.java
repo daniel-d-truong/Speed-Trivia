@@ -68,7 +68,7 @@ public class Trivia extends Activity {
 
         TextView q = (TextView) findViewById(R.id.question2);
         String message = getString(R.string.question); //used to access the String resource
-        message+=" "+count; //changes the message 
+        message+=" "+count; //changes the message
 
         q.setText(message);
     }
