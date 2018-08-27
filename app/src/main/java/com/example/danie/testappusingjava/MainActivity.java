@@ -1,10 +1,14 @@
 package com.example.danie.testappusingjava;
 
 import android.content.Intent;
+import android.nfc.Tag;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toolbar;
@@ -14,6 +18,7 @@ import android.widget.Toolbar;
 public class MainActivity extends AppCompatActivity {
     private Button btn;
     private ActionBar toolbar;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = getSupportActionBar();
         BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.navigationView);
+        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Log.d(TAG, menuItem.getTitle()+" has been selected.");
+                return false;
+            }
+        });
     }
 
     //method to lead to trivia activity
