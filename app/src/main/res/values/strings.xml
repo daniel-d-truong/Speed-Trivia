@@ -15,5 +15,8 @@
     <string name="title_activity_bottom_navigate">BottomNavigate</string>
     <string name="title_left">Home</string>
     <string name="title_mid">Quiz</string>
-    <string name="title_right">Notifications</string>
+    <string name="title_right">Account</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
