@@ -19,7 +19,7 @@ import android.widget.Toolbar;
 //https://code.tutsplus.com/tutorials/how-to-code-a-bottom-navigation-bar-for-an-android-app--cms-30305
 //used to make bottom navigation
 public class MainActivity extends AppCompatActivity {
-    private Button btn;
+
     private ActionBar toolbar;
     private static final String TAG = "MainActivity";
 
@@ -29,15 +29,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 //        parseJSON.parse();
 
-        btn = (Button) findViewById(R.id.button_quiz);
-
-        //OnClickListener for when user taps the button
-        btn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                openTriviaActivity();
-            }
-        });
 
         toolbar = getSupportActionBar();
         BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.navigationView);
@@ -48,16 +39,17 @@ public class MainActivity extends AppCompatActivity {
                 Fragment selectedFragment = null;
                 switch (menuItem.getItemId()){
                     case R.id.navigation_home:
-                        selectedFragment = BlankFragment.newInstance();
+                        selectedFragment = new BlankFragment();
                         break;
                     case R.id.navigation_quiz:
-                        selectedFragment = QuizFragment.newInstance();
+                        selectedFragment = new QuizFragment();
                         break;
                     case R.id.navigation_account:
-                        selectedFragment = AccountFragment.newInstance();
+                        selectedFragment = new AccountFragment();
                         break;
 
                 }
+                Log.d(TAG, "selectedFragment is set!");
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.container, selectedFragment);
                 transaction.commit();
@@ -68,11 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //method to lead to trivia activity
-    public void openTriviaActivity(){
-        Intent in = new Intent (this, Trivia.class); //must create an Intent object
-        startActivity(in); //pass the Intent object into the startActivity(Intent) class in order to actually start the activity
-    }
 
 
 
