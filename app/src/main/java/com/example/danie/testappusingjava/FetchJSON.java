@@ -22,7 +22,7 @@ public class FetchJSON extends AsyncTask<Void, Void, Void> {
     String data = "";
     ArrayList<String> questionsList = new ArrayList<String>();
     String singleParsed = "";
-    String link = "https://opentdb.com/api.php?amount=1&type=multiple";
+    String link = "https://opentdb.com/api.php?amount=10&type=multiple";
 
     @Override
     protected Void doInBackground(Void... voids) {

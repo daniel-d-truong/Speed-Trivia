@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import javax.xml.namespace.QName;
 
 import static android.support.constraint.Constraints.TAG;
@@ -20,7 +22,10 @@ public class Trivia extends Activity {
     private Button btn;
     private RadioGroup choices;
     private int count = 0;
+    private ArrayList<String> questionList;
     public static TextView question;
+    FetchJSON process = new FetchJSON();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +36,12 @@ public class Trivia extends Activity {
         choices = (RadioGroup) findViewById (R.id.multiple_choice);
         btn = (Button) findViewById(R.id.submit);
         question = (TextView) findViewById(R.id.question2);
+        process.setLink("https://opentdb.com/api.php?amount=10&type=multiple");
+        process.execute();
+        questionList = process.getQuestionsList();
         Log.d(TAG, "Trivia has been created");
+
+        //set question to API
 
         //special method to use when any of the buttons in the RadioGroup are selected
         choices.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -66,9 +76,8 @@ public class Trivia extends Activity {
 
     //changes the Question when button is clicked
     private void changeQuestion(){
-        FetchJSON process = new FetchJSON();
-        process.setLink("https://opentdb.com/api.php?amount=1&type=multiple");
-        process.execute();
+        count++;
+        question.setText(questionList.get(count));
 //        count++;
 //
 //        TextView q = (TextView) findViewById(R.id.question2);
