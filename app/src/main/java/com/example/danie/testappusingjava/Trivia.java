@@ -20,6 +20,7 @@ public class Trivia extends Activity {
     private Button btn;
     private RadioGroup choices;
     private int count = 0;
+    public static TextView question;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class Trivia extends Activity {
         //variables that select a View in the XML must be initiated AFTER the activity xml has been loaded
         choices = (RadioGroup) findViewById (R.id.multiple_choice);
         btn = (Button) findViewById(R.id.submit);
+        question = (TextView) findViewById(R.id.question2);
         Log.d(TAG, "Trivia has been created");
 
         //special method to use when any of the buttons in the RadioGroup are selected
@@ -64,13 +66,15 @@ public class Trivia extends Activity {
 
     //changes the Question when button is clicked
     private void changeQuestion(){
-        count++;
-
-        TextView q = (TextView) findViewById(R.id.question2);
-        String message = getString(R.string.question); //used to access the String resource
-        message+=" "+count; //changes the message
-
-        q.setText(message);
+        FetchJSON process = new FetchJSON();
+        process.execute();
+//        count++;
+//
+//        TextView q = (TextView) findViewById(R.id.question2);
+//        String message = getString(R.string.question); //used to access the String resource
+//        message+=" "+count; //changes the message
+//
+//        q.setText(message);
     }
 
     //changes the Choices when button is clicked
