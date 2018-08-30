@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -23,7 +24,14 @@ public class Trivia extends Activity {
     private RadioGroup choices;
     private int count = 0;
     private ArrayList<String> questionList;
+    private ArrayList<String> correctList;
+    private ArrayList<String[]> incorrectList;
     public static TextView question;
+    public static RadioButton choice1;
+    public static RadioButton choice2;
+    public static RadioButton choice3;
+    public static RadioButton choice4;
+
     FetchJSON process = new FetchJSON();
 
 
@@ -36,9 +44,17 @@ public class Trivia extends Activity {
         choices = (RadioGroup) findViewById (R.id.multiple_choice);
         btn = (Button) findViewById(R.id.submit);
         question = (TextView) findViewById(R.id.question2);
+        choice1 = (RadioButton) findViewById(R.id.radioButton1);
+        choice2 = (RadioButton) findViewById(R.id.radioButton2);
+        choice3 = (RadioButton) findViewById(R.id.radioButton3);
+        choice4 = (RadioButton) findViewById(R.id.radioButton4);
+
         process.setLink("https://opentdb.com/api.php?amount=10&type=multiple");
         process.execute();
+
         questionList = process.getQuestionsList();
+        correctList = process.getAnswersList();
+        incorrectList = process.getIncorrectList();
         Log.d(TAG, "Trivia has been created");
 
         //set question to API
@@ -90,6 +106,7 @@ public class Trivia extends Activity {
     //changes the Choices when button is clicked
     private void changeChoices() {
         System.out.println(0);
+
     }
 
     //resets the question layout

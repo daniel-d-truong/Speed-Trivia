@@ -21,6 +21,8 @@ import static android.support.constraint.Constraints.TAG;
 public class FetchJSON extends AsyncTask<Void, Void, Void> {
     String data = "";
     ArrayList<String> questionsList = new ArrayList<String>();
+    ArrayList<String> answersList = new ArrayList<String>();
+    ArrayList<String[]> incorrectList = new ArrayList<String[]>();
     String singleParsed = "";
     String link = "https://opentdb.com/api.php?amount=10&type=multiple";
 
@@ -49,6 +51,16 @@ public class FetchJSON extends AsyncTask<Void, Void, Void> {
                 JSONObject JO = (JSONObject) JA.get(i);
                 singleParsed = JO.getString("question");
                 questionsList.add(singleParsed);
+
+                answersList.add(JO.getString("correct_answer"));
+                JSONArray tempJson = (JSONArray) JO.get("incorrect_answers");
+                String[] temp = new String[3];
+                for (int k = 0; k < tempJson.length(); k++){
+                    String x = (String) tempJson.get(k);
+                    temp[k] = x; Log.d(TAG, "This tempJson works: "+x);
+                }
+                incorrectList.add(temp);
+
                 Log.d(TAG, "Parsed line" + singleParsed);
             }
         } catch (MalformedURLException e) {
@@ -73,10 +85,22 @@ public class FetchJSON extends AsyncTask<Void, Void, Void> {
 //        }
         Log.d(TAG, data);
         Trivia.question.setText(questionsList.get(0));
+        Trivia.choice1.setText(answersList.get(0));
+        Trivia.choice2.setText(incorrectList.get(0)[0]);
+        Trivia.choice3.setText(incorrectList.get(0)[1]);
+        Trivia.choice4.setText(incorrectList.get(0)[2]);
     }
 
     public ArrayList<String> getQuestionsList() {
         return questionsList;
+    }
+
+    public ArrayList<String> getAnswersList() {
+        return answersList;
+    }
+
+    public ArrayList<String[]> getIncorrectList() {
+        return incorrectList;
     }
 
     public void setLink(String url){
