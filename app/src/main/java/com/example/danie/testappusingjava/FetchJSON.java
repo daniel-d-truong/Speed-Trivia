@@ -36,13 +36,14 @@ public class FetchJSON extends AsyncTask<Void, Void, Void> {
                 data = data + line;
             }
 
-            JSONArray JA_temp = new JSONArray(data);
+            JSONObject JA_temp = new JSONObject(data);
 
-            JSONArray JA = new JSONArray(JA_temp.getJSONArray(1));
+            JSONArray JA = new JSONArray(JA_temp.getJSONArray("results").toString()); //MUST USE .toSTRING() TO PARSE CORRECTLY
             Log.d(TAG, "The for loop is not running");
             for(int i = 0; i < JA.length(); i++){
                 JSONObject JO = (JSONObject) JA.get(i);
-                singleParsed = "Question: " + JO.get("question");
+                singleParsed = "Question: " + JO.get("question") + '\n';
+                dataParsed += singleParsed;
                 Log.d(TAG, "Parsed line" + singleParsed);
             }
         } catch (MalformedURLException e) {
