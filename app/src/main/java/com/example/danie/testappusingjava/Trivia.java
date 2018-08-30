@@ -67,6 +67,7 @@ public class Trivia extends Activity {
     //changes the Question when button is clicked
     private void changeQuestion(){
         FetchJSON process = new FetchJSON();
+        process.setLink("https://opentdb.com/api.php?amount=1&type=multiple");
         process.execute();
 //        count++;
 //
