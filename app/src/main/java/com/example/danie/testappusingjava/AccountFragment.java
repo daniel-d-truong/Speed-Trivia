@@ -1,4 +1,5 @@
 package com.example.danie.testappusingjava;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,7 +14,10 @@ public class AccountFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+//        openShowScoreActivity();
+
     }
 
     @Override
@@ -22,4 +26,9 @@ public class AccountFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_account, container, false);
         return rootView;
     }
+
+//    public void openShowScoreActivity(){
+//        Intent in = new Intent (getActivity(), ShowScoresActivity.class); //must create an Intent object
+//        startActivity(in); //pass the Intent object into the startActivity(Intent) class in order to actually start the activity
+//    }
 }

@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = getSupportActionBar();
         BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.navigationView);
+
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
