@@ -3,6 +3,7 @@ package com.example.danie.testappusingjava;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +26,7 @@ public class Trivia extends Activity {
     private int count = 0;
     private int correct = 0;
     private int incorrect = 0;
-    private int total = 0;
+    private int total = 10;
 
     private ArrayList<String> questionList;
     private ArrayList<String> correctList;
@@ -84,10 +85,16 @@ public class Trivia extends Activity {
                 //checks if any RadioButton has been selected
                 if (choices.getCheckedRadioButtonId() != -1) { //when value is -1, that means no button has been selected
                     count++;
-                    checkAnswer(choices.getCheckedRadioButtonId());
-                    changeQuestion();
-                    changeChoices();
-                    resetRadio();
+                    if (count > 9){
+                        showResults();
+                    }
+                    else{
+                        checkAnswer(choices.getCheckedRadioButtonId());
+                        changeQuestion();
+                        changeChoices();
+                        resetRadio();
+                    }
+
                 }
                 else { //creates pop-up telling user to make a choice
                     Log.d(TAG, "Else Statement has been Run.");
@@ -99,17 +106,28 @@ public class Trivia extends Activity {
         });
     }
 
+    private void showResults() {
+        ConstraintLayout showScore = (ConstraintLayout) findViewById(R.id.showScoresLayout);
+        TextView score = (TextView) findViewById(R.id.score);
+        ConstraintLayout parent = (ConstraintLayout) findViewById(R.id.quizLayout);
+
+
+        score.setText(correct+"/"+total);
+        showScore.setVisibility(View.VISIBLE);
+        parent.setVisibility(View.GONE);
+
+    }
+
     private void checkAnswer(int id) {
         RadioButton selected = (RadioButton) findViewById((id));
-        if (selected.getText() == correctList.get(count)){
+        if (selected.getText() == correctList.get(count-1)){
             Log.d(TAG, "Correct answer!");
             correct+=1;
         }
         else{
-            Log.d(TAG, "Incorrect answer!");
+            Log.d(TAG, "Incorrect answer! The correct answer is: " + correctList.get(count-1));
             incorrect+=1;
         }
-        total+=1;
     }
 
     //changes the Question when button is clicked
