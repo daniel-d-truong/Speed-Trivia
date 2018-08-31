@@ -31,6 +31,7 @@ public class Trivia extends Activity {
     public static RadioButton choice2;
     public static RadioButton choice3;
     public static RadioButton choice4;
+    private RadioButton[] choicesList;
 
     FetchJSON process = new FetchJSON();
 
@@ -48,6 +49,7 @@ public class Trivia extends Activity {
         choice2 = (RadioButton) findViewById(R.id.radioButton2);
         choice3 = (RadioButton) findViewById(R.id.radioButton3);
         choice4 = (RadioButton) findViewById(R.id.radioButton4);
+        choicesList = new RadioButton[]{choice1, choice2, choice3, choice4};
 
         process.setLink("https://opentdb.com/api.php?amount=10&type=multiple");
         process.execute();
@@ -76,6 +78,7 @@ public class Trivia extends Activity {
             public void onClick(View v) {
                 //checks if any RadioButton has been selected
                 if (choices.getCheckedRadioButtonId() != -1) { //when value is -1, that means no button has been selected
+                    count++;
                     changeQuestion();
                     changeChoices();
                     resetRadio();
@@ -92,7 +95,6 @@ public class Trivia extends Activity {
 
     //changes the Question when button is clicked
     private void changeQuestion(){
-        count++;
         question.setText(questionList.get(count));
 //        count++;
 //
@@ -105,7 +107,20 @@ public class Trivia extends Activity {
 
     //changes the Choices when button is clicked
     private void changeChoices() {
-        System.out.println(0);
+        int correctIndex = (int) Math.random()*4;
+        String[] incorrects = incorrectList.get(count);
+        int index = 0;
+        for (int i = 0; i < 4; i ++){
+            RadioButton temp = choicesList[i];
+            if (i == correctIndex){
+                temp.setText(correctList.get(count));
+            }
+            else{
+                temp.setText(incorrects[index]);
+                index+=1;
+            }
+
+        }
 
     }
 
