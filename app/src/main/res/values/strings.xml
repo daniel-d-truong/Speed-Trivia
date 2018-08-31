@@ -15,8 +15,10 @@
     <string name="title_activity_bottom_navigate">BottomNavigate</string>
     <string name="title_left">Home</string>
     <string name="title_mid">Quiz</string>
-    <string name="title_right">Account</string>
+    <string name="title_right">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="score">8/10</string>
+    <string name="yourscoreis">Your Score Is:</string>
 </resources>

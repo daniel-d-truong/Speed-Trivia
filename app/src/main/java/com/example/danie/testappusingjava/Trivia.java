@@ -23,9 +23,14 @@ public class Trivia extends Activity {
     private Button btn;
     private RadioGroup choices;
     private int count = 0;
+    private int correct = 0;
+    private int incorrect = 0;
+    private int total = 0;
+
     private ArrayList<String> questionList;
     private ArrayList<String> correctList;
     private ArrayList<String[]> incorrectList;
+
     public static TextView question;
     public static RadioButton choice1;
     public static RadioButton choice2;
@@ -79,6 +84,7 @@ public class Trivia extends Activity {
                 //checks if any RadioButton has been selected
                 if (choices.getCheckedRadioButtonId() != -1) { //when value is -1, that means no button has been selected
                     count++;
+                    checkAnswer(choices.getCheckedRadioButtonId());
                     changeQuestion();
                     changeChoices();
                     resetRadio();
@@ -91,6 +97,19 @@ public class Trivia extends Activity {
                 }
             }
         });
+    }
+
+    private void checkAnswer(int id) {
+        RadioButton selected = (RadioButton) findViewById((id));
+        if (selected.getText() == correctList.get(count)){
+            Log.d(TAG, "Correct answer!");
+            correct+=1;
+        }
+        else{
+            Log.d(TAG, "Incorrect answer!");
+            incorrect+=1;
+        }
+        total+=1;
     }
 
     //changes the Question when button is clicked

@@ -8,13 +8,30 @@
     tools:context=".Trivia">
 
     <TextView
+        android:id="@+id/score"
+        android:layout_width="269dp"
+        android:layout_height="105dp"
+        android:layout_marginBottom="320dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="serif"
+        android:text="@string/score"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="8/10" />
+
+    <TextView
         android:id="@+id/question2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="23dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/question"
@@ -82,5 +99,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.903" />
+
+    <TextView
+        android:id="@+id/your-score-is"
+        android:layout_width="269dp"
+        android:layout_height="105dp"
+        android:layout_marginBottom="372dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/yourscoreis"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Your Score Is: " />
 </android.support.constraint.ConstraintLayout>
 
