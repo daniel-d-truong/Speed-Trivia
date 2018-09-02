@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 /**
@@ -13,6 +14,8 @@ import android.view.ViewGroup;
  */
 public class ShowScoresResultFragment extends Fragment {
 
+    private int correct;
+    private int total;
 
     public ShowScoresResultFragment() {
         // Required empty public constructor
@@ -23,7 +26,12 @@ public class ShowScoresResultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_show_scores_result, container, false);
+        View rootView =  inflater.inflate(R.layout.fragment_show_scores_result, container, false);
+        TextView tempc = (TextView) rootView.findViewById(R.id.quiz_correct);
+        correct = tempc.getText().toString();
+
+
+        return rootView;
     }
 
 }
