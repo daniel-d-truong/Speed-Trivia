@@ -24,22 +24,9 @@ public class Trivia extends Activity {
     private Button btn;
     private RadioGroup choices;
     private int count = 0;
-
-    public int getCorrect() {
-        return correct;
-    }
-
-    public int getIncorrect() {
-        return incorrect;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public int correct = 0;
-    public int incorrect = 0;
-    public int total = 10;
+    private int correct = 0;
+    private int incorrect = 0;
+    private int total = 10;
 
     private ArrayList<String> questionList;
     private ArrayList<String> correctList;
@@ -100,7 +87,6 @@ public class Trivia extends Activity {
                     count++;
                     if (count > 9){
                         showResults();
-                        changeValues();
                     }
                     else{
                         checkAnswer(choices.getCheckedRadioButtonId());
@@ -118,14 +104,6 @@ public class Trivia extends Activity {
                 }
             }
         });
-    }
-
-    private void changeValues() {
-        TextView c = (TextView) findViewById(R.id.quiz_correct);
-        c.setText(correct+"");
-
-        TextView t = (TextView) findViewById(R.id.quiz_total);
-        t.setText(total+"");
     }
 
     private void showResults() {
