@@ -1,5 +1,6 @@
 package com.example.danie.testappusingjava;
 
+import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -49,6 +50,11 @@ public class ShowScoresActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -133,13 +139,26 @@ public class ShowScoresActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+//            return PlaceholderFragment.newInstance(position + 1);
+            Fragment fragment = null;
+            switch (position){
+                case 0:
+                    fragment = new ShowScoresResultFragment();
+                    break;
+
+                case 1:
+                    fragment = new ShowScoresQuestionsFragment();
+                    break;
+
+            }
+            return fragment;
+
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
     }
 }

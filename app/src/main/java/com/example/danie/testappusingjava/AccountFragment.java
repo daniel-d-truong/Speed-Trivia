@@ -16,7 +16,7 @@ public class AccountFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-//        openShowScoreActivity();
+        openShowScoreActivity();
 
     }
 
@@ -27,8 +27,8 @@ public class AccountFragment extends Fragment {
         return rootView;
     }
 
-//    public void openShowScoreActivity(){
-//        Intent in = new Intent (getActivity(), ShowScoresActivity.class); //must create an Intent object
-//        startActivity(in); //pass the Intent object into the startActivity(Intent) class in order to actually start the activity
-//    }
+    public void openShowScoreActivity(){
+        Intent in = new Intent (getActivity(), ShowScoresActivity.class); //must create an Intent object
+        startActivity(in); //pass the Intent object into the startActivity(Intent) class in order to actually start the activity
+    }
 }

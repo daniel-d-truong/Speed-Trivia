@@ -39,7 +39,7 @@
         <activity
             android:name=".ShowScoresActivity"
             android:label="@string/title_activity_show_scores"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
