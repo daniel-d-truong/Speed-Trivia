@@ -139,7 +139,7 @@ public class ShowScoresActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-//            return PlaceholderFragment.newInstance(position + 1);
+
             Fragment fragment = null;
             switch (position){
                 case 0:
@@ -151,14 +151,18 @@ public class ShowScoresActivity extends AppCompatActivity {
                     break;
 
             }
+
+//            return PlaceholderFragment.newInstance(position + 1);
             return fragment;
 
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
+            // Show 2 total pages.
             return 2;
         }
+
     }
+
 }
