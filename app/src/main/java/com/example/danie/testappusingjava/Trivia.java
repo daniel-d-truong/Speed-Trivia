@@ -6,9 +6,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -41,6 +45,7 @@ public class Trivia extends Activity {
     public static RadioButton choice3;
     public static RadioButton choice4;
     private RadioButton[] choicesList;
+    private LinearLayout showRecapLayout;
 
     FetchJSON process = new FetchJSON();
 
@@ -64,6 +69,7 @@ public class Trivia extends Activity {
         choice3 = (RadioButton) findViewById(R.id.radioButton3);
         choice4 = (RadioButton) findViewById(R.id.radioButton4);
         choicesList = new RadioButton[]{choice1, choice2, choice3, choice4};
+
 
         process.setLink("https://opentdb.com/api.php?amount=10&type=multiple");
         process.execute();
@@ -93,14 +99,17 @@ public class Trivia extends Activity {
             public void onClick(View v) {
                 //checks if any RadioButton has been selected
                 if (choices.getCheckedRadioButtonId() != -1) { //when value is -1, that means no button has been selected
-                    count++;
+
                     if (count > 9){
                         showResults();
+                        count = 0;
                     }
                     else{
                         checkAnswer(choices.getCheckedRadioButtonId());
+                        count++;
                         changeQuestion();
                         changeChoices();
+                        addToShowRecap();
                         resetRadio();
                     }
 
@@ -113,6 +122,14 @@ public class Trivia extends Activity {
                 }
             }
         });
+    }
+
+    private void addToShowRecap() {
+        TextView valueQuestion = new TextView (this);
+        TextView valueAnswer = new TextView(this);
+        valueQuestion.setText(question.getText());
+        valueAnswer.setText(correctList.get(count));
+
     }
 
     @SuppressLint("DefaultLocale")
@@ -130,12 +147,12 @@ public class Trivia extends Activity {
 
     private void checkAnswer(int id) {
         RadioButton selected = (RadioButton) findViewById((id));
-        if (selected.getText() == correctList.get(count-1)){
+        if (selected.getText() == correctList.get(count)){
             Log.d(TAG, "Correct answer!");
             correct+=1;
         }
         else{
-            Log.d(TAG, "Incorrect answer! The correct answer is: " + correctList.get(count-1));
+            Log.d(TAG, "Incorrect answer! The correct answer is: " + correctList.get(count));
             incorrect+=1;
             userChoseIncorrectsOnly.add((String) selected.getText());
         }
@@ -176,5 +193,28 @@ public class Trivia extends Activity {
     private void resetRadio() {
         choices.clearCheck(); //clears the checkedRadioButton in RadioGroup
         btn.setBackgroundResource(android.R.drawable.btn_default); //special code that sets button object to default color
+    }
+
+    class CustomAdapter extends BaseAdapter{
+
+        @Override
+        public int getCount() {
+            return total;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return null;
+        }
     }
 }
