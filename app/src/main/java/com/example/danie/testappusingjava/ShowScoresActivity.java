@@ -19,6 +19,8 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class ShowScoresActivity extends AppCompatActivity {
 
     /**
@@ -36,6 +38,7 @@ public class ShowScoresActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    private ArrayList<String> userChose = Trivia.userChoseIncorrectsOnly;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

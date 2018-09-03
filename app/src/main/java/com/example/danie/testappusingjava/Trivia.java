@@ -33,6 +33,7 @@ public class Trivia extends Activity {
     private ArrayList<String> questionList;
     private ArrayList<String> correctList;
     private ArrayList<String[]> incorrectList;
+    public static ArrayList<String> userChoseIncorrectsOnly;
 
     public static TextView question;
     public static RadioButton choice1;
@@ -52,6 +53,8 @@ public class Trivia extends Activity {
         //variables that select a View in the XML must be initiated AFTER the activity xml has been loaded
         correct = 0;
         incorrect = 0;
+        total = 10;
+        userChoseIncorrectsOnly = new ArrayList<String>();
 
         choices = (RadioGroup) findViewById (R.id.multiple_choice);
         btn = (Button) findViewById(R.id.submit);
@@ -68,6 +71,7 @@ public class Trivia extends Activity {
         questionList = process.getQuestionsList();
         correctList = process.getAnswersList();
         incorrectList = process.getIncorrectList();
+        userChoseIncorrectsOnly = new ArrayList<String>();
         Log.d(TAG, "Trivia has been created");
 
         //set question to API
@@ -133,6 +137,7 @@ public class Trivia extends Activity {
         else{
             Log.d(TAG, "Incorrect answer! The correct answer is: " + correctList.get(count-1));
             incorrect+=1;
+            userChoseIncorrectsOnly.add((String) selected.getText());
         }
     }
 
