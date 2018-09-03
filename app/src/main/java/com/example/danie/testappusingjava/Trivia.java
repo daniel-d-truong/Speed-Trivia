@@ -1,5 +1,6 @@
 package com.example.danie.testappusingjava;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import javax.xml.namespace.QName;
 
 import static android.support.constraint.Constraints.TAG;
+import static java.lang.String.format;
 
 
 public class Trivia extends Activity {
@@ -24,9 +26,9 @@ public class Trivia extends Activity {
     private Button btn;
     private RadioGroup choices;
     private int count = 0;
-    private int correct = 0;
-    private int incorrect = 0;
-    private int total = 10;
+    public static int correct = 0;
+    public static int incorrect = 0;
+    public static int total = 10;
 
     private ArrayList<String> questionList;
     private ArrayList<String> correctList;
@@ -48,6 +50,9 @@ public class Trivia extends Activity {
         setContentView(R.layout.activity_trivia);
 
         //variables that select a View in the XML must be initiated AFTER the activity xml has been loaded
+        correct = 0;
+        incorrect = 0;
+
         choices = (RadioGroup) findViewById (R.id.multiple_choice);
         btn = (Button) findViewById(R.id.submit);
         question = (TextView) findViewById(R.id.question2);
@@ -106,15 +111,16 @@ public class Trivia extends Activity {
         });
     }
 
+    @SuppressLint("DefaultLocale")
     private void showResults() {
-        ConstraintLayout showScore = (ConstraintLayout) findViewById(R.id.showScoresLayout);
+//        ConstraintLayout showScore = (ConstraintLayout) findViewById(R.id.showScoresLayout);
         TextView score = (TextView) findViewById(R.id.score);
-        ConstraintLayout parent = (ConstraintLayout) findViewById(R.id.quizLayout);
+//        ConstraintLayout parent = (ConstraintLayout) findViewById(R.id.quizLayout);
 
 
-        score.setText(correct+"/"+total);
-        showScore.setVisibility(View.VISIBLE);
-        parent.setVisibility(View.GONE);
+        score.setText(format("%d/%d", correct, total));
+//        showScore.setVisibility(View.VISIBLE);
+//        parent.setVisibility(View.GONE);
 
     }
 
