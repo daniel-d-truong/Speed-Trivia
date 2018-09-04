@@ -3,18 +3,22 @@ package com.example.danie.testappusingjava;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static android.support.constraint.Constraints.TAG;
@@ -36,7 +40,14 @@ public class ShowScoresQuestionsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_show_scores_questions, container, false);
-        dynamicListView();
+        ListView listView = (ListView) rootView.findViewById(R.id.list_view);
+        if (listView == null){
+            Log.d(TAG, "onCreateView listView IS NULL");
+        }
+        else
+            Log.d(TAG, "onCreateView listView IS NOT NULL");
+        CustomAdapter customAdapter = new CustomAdapter(getActivity(), Trivia.questionList);
+        listView.setAdapter(customAdapter);
 
 
         return rootView;
@@ -51,11 +62,14 @@ public class ShowScoresQuestionsFragment extends Fragment {
             Log.d(TAG, "listview is NULL");
         else
             Log.d(TAG, "listview is NOT NULL");
-        CustomAdapter customAdapter = new CustomAdapter();
-        listView.setAdapter(customAdapter);
+
     }
 
-    class CustomAdapter extends BaseAdapter {
+    class CustomAdapter extends ArrayAdapter {
+
+        public CustomAdapter(@NonNull Context context, ArrayList<String> questions) {
+            super(context, 0, questions);
+        }
 
         @Override
         public int getCount() {
@@ -74,14 +88,18 @@ public class ShowScoresQuestionsFragment extends Fragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = LayoutInflater.from(getContext()).inflate(R.layout.custom_list_view, null);
+            String currentQuestion = (String) getItem(position);
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_list_view, null);
+            }
 
-            TextView qView = (TextView) view.findViewById(R.id.show_question);
-            TextView aView = (TextView) view.findViewById(R.id.show_answer);
 
-            qView.setText(Trivia.questionList.get(position));
-            aView.setText(Trivia.correctList.get(position));
-            return view;
+            TextView qView = (TextView) convertView.findViewById(R.id.show_question);
+            TextView aView = (TextView) convertView.findViewById(R.id.show_answer);
+
+            qView.setText("Question: " + Trivia.questionList.get(position));
+            aView.setText("Answer: " + Trivia.correctList.get(position));
+            return convertView;
         }
     }
 
