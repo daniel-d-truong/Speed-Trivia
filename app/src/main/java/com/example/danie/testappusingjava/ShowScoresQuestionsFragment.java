@@ -85,8 +85,8 @@ public class ShowScoresQuestionsFragment extends Fragment {
             TextView qView = (TextView) convertView.findViewById(R.id.show_question);
             TextView aView = (TextView) convertView.findViewById(R.id.show_answer);
 
-            qView.setText("Question: " + Trivia.questionList.get(position));
-            aView.setText("Answer: " + Trivia.correctList.get(position));
+            qView.setText("Question: " + Trivia.questionList.get(position) + "\nAnswer: " + Trivia.correctList.get(position));
+//            aView.setText("Answer: " + Trivia.correctList.get(position));
             return convertView;
         }
     }
