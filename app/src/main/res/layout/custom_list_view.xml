@@ -20,6 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/show_question"
-        android:layout_marginTop="47dp"
-        android:text="Answer" />
+        android:layout_below="@+id/show_question"
+        android:layout_marginTop="47dp" />
 </RelativeLayout>

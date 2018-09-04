@@ -53,18 +53,6 @@ public class ShowScoresQuestionsFragment extends Fragment {
         return rootView;
     }
 
-    public void dynamicListView(){
-        LayoutInflater inflateCustom = (LayoutInflater) LayoutInflater.from(getContext());
-        LinearLayout linearContainer = (LinearLayout) inflateCustom.inflate(R.layout.fragment_show_scores_questions, null);
-
-        ListView listView = (ListView) linearContainer.findViewById(R.id.list_view);
-        if (listView == null)
-            Log.d(TAG, "listview is NULL");
-        else
-            Log.d(TAG, "listview is NOT NULL");
-
-    }
-
     class CustomAdapter extends ArrayAdapter {
 
         public CustomAdapter(@NonNull Context context, ArrayList<String> questions) {
