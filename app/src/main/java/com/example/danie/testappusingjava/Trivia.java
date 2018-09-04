@@ -104,16 +104,14 @@ public class Trivia extends Activity {
             public void onClick(View v) {
                 //checks if any RadioButton has been selected
                 if (choices.getCheckedRadioButtonId() != -1) { //when value is -1, that means no button has been selected
+                    checkAnswer(choices.getCheckedRadioButtonId());
                     count++;
                     if (count > 9){
-                        showResults();
-                        showRecap();
+//                        showResults();
+//                        showRecap();
                         openShowScoreActivity();
                     }
                     else{
-                        count--;
-                        checkAnswer(choices.getCheckedRadioButtonId());
-                        count++;
                         changeQuestion();
                         changeChoices();
                         Log.d(TAG, count+"");
@@ -138,7 +136,7 @@ public class Trivia extends Activity {
             Log.d(TAG, "listview is NULL");
         else
             Log.d(TAG, "listview is NOT NULL");
-        CustomAdapter customAdapter = new CustomAdapter();
+//        CustomAdapter customAdapter = new CustomAdapter();
         assert listView != null;
         listView.setAdapter((ListAdapter) listView);
     }
@@ -217,33 +215,5 @@ public class Trivia extends Activity {
         startActivity(in); //pass the Intent object into the startActivity(Intent) class in order to actually start the activity
     }
 
-    class CustomAdapter extends BaseAdapter{
 
-        @Override
-        public int getCount() {
-            return total;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.custom_list_view, null);
-
-            TextView qView = (TextView) view.findViewById(R.id.show_question);
-            TextView aView = (TextView) view.findViewById(R.id.show_answer);
-
-            qView.setText(questionList.get(position));
-            aView.setText(correctList.get(position));
-            return view;
-        }
-    }
 }
