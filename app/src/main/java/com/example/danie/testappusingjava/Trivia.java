@@ -77,6 +77,7 @@ public class Trivia extends Activity {
 
 
         process.setLink("https://opentdb.com/api.php?amount=10&type=multiple");
+        process.setOriginate(0);
         process.execute();
 
         questionList = process.getQuestionsList();
