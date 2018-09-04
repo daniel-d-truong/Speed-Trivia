@@ -2,6 +2,7 @@ package com.example.danie.testappusingjava;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -13,9 +14,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -34,9 +39,9 @@ public class Trivia extends Activity {
     public static int incorrect = 0;
     public static int total = 10;
 
-    private ArrayList<String> questionList;
-    private ArrayList<String> correctList;
-    private ArrayList<String[]> incorrectList;
+    public static ArrayList<String> questionList;
+    public static ArrayList<String> correctList;
+    public static ArrayList<String[]> incorrectList;
     public static ArrayList<String> userChoseIncorrectsOnly;
 
     public static TextView question;
@@ -99,17 +104,19 @@ public class Trivia extends Activity {
             public void onClick(View v) {
                 //checks if any RadioButton has been selected
                 if (choices.getCheckedRadioButtonId() != -1) { //when value is -1, that means no button has been selected
-
+                    count++;
                     if (count > 9){
                         showResults();
-                        count = 0;
+                        showRecap();
+                        openShowScoreActivity();
                     }
                     else{
+                        count--;
                         checkAnswer(choices.getCheckedRadioButtonId());
                         count++;
                         changeQuestion();
                         changeChoices();
-                        addToShowRecap();
+                        Log.d(TAG, count+"");
                         resetRadio();
                     }
 
@@ -124,24 +131,33 @@ public class Trivia extends Activity {
         });
     }
 
-    private void addToShowRecap() {
-        TextView valueQuestion = new TextView (this);
-        TextView valueAnswer = new TextView(this);
-        valueQuestion.setText(question.getText());
-        valueAnswer.setText(correctList.get(count));
+    private void showRecap() {
+        ListView listView = (ListView) findViewById(R.id.list_view);
 
+        if (listView == null)
+            Log.d(TAG, "listview is NULL");
+        else
+            Log.d(TAG, "listview is NOT NULL");
+        CustomAdapter customAdapter = new CustomAdapter();
+        assert listView != null;
+        listView.setAdapter((ListAdapter) listView);
     }
 
-    @SuppressLint("DefaultLocale")
     private void showResults() {
-//        ConstraintLayout showScore = (ConstraintLayout) findViewById(R.id.showScoresLayout);
-        TextView score = (TextView) findViewById(R.id.score);
-//        ConstraintLayout parent = (ConstraintLayout) findViewById(R.id.quizLayout);
-
-
-        score.setText(format("%d/%d", correct, total));
-//        showScore.setVisibility(View.VISIBLE);
-//        parent.setVisibility(View.GONE);
+////        ConstraintLayout showScore = (ConstraintLayout) findViewById(R.id.showScoresLayout);
+//        TextView score = (TextView) findViewById(R.id.scores);
+//        if (score != null){
+//            Log.d(TAG, "Score is not null!");
+//        }
+//        else
+//            Log.d(TAG, "Score is null!");
+////        ConstraintLayout parent = (ConstraintLayout) findViewById(R.id.quizLayout);
+//
+//
+//        score.setText(correct+"/"+total);//fix this!!!
+////        showScore.setVisibility(View.VISIBLE);
+////        parent.setVisibility(View.GONE);
+        Log.d(TAG, "HI");
 
     }
 
@@ -195,6 +211,12 @@ public class Trivia extends Activity {
         btn.setBackgroundResource(android.R.drawable.btn_default); //special code that sets button object to default color
     }
 
+    public void openShowScoreActivity(){
+        Intent in = new Intent (this, ShowScoresActivity.class); //must create an Intent object
+        in.putExtra("score", correct+"/"+total);
+        startActivity(in); //pass the Intent object into the startActivity(Intent) class in order to actually start the activity
+    }
+
     class CustomAdapter extends BaseAdapter{
 
         @Override
@@ -214,7 +236,14 @@ public class Trivia extends Activity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            return null;
+            View view = getLayoutInflater().inflate(R.layout.custom_list_view, null);
+
+            TextView qView = (TextView) view.findViewById(R.id.show_question);
+            TextView aView = (TextView) view.findViewById(R.id.show_answer);
+
+            qView.setText(questionList.get(position));
+            aView.setText(correctList.get(position));
+            return view;
         }
     }
 }

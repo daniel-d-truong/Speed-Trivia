@@ -18,11 +18,10 @@
         android:text="@string/yourscoreis"
         android:textAlignment="center"
         android:textSize="30sp"
-        android:textStyle="bold"
-        tools:text="Your Score Is: " />
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/score"
+        android:id="@+id/scores"
         android:layout_width="273dp"
         android:layout_height="121dp"
         android:layout_below="@+id/your-score-is"
@@ -31,7 +30,6 @@
         android:text="@string/score"
         android:textAlignment="center"
         android:textSize="50sp"
-        android:textStyle="bold"
-        tools:text="8/10" />
+        android:textStyle="bold" />
 
 </RelativeLayout>
