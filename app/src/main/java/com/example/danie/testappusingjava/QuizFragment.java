@@ -38,7 +38,7 @@ public class QuizFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                openTriviaActivity();
+                openTriviaActivity(); //starts trivia activity when user selects button
             }
         });
 

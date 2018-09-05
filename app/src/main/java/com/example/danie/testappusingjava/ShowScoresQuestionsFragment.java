@@ -47,14 +47,17 @@ public class ShowScoresQuestionsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_show_scores_questions, container, false);
-        ListView listView = (ListView) rootView.findViewById(R.id.list_view);
+        ListView listView = (ListView) rootView.findViewById(R.id.list_view); //selects list view to displa questions
+
+
         if (listView == null){
             Log.d(TAG, "onCreateView listView IS NULL");
         }
         else
             Log.d(TAG, "onCreateView listView IS NOT NULL");
-        CustomAdapter customAdapter = new CustomAdapter(getActivity(), Trivia.questionList);
-        listView.setAdapter(customAdapter);
+
+        CustomAdapter customAdapter = new CustomAdapter(getActivity(), Trivia.questionList); //getActivity() represents the context, questionLIst is the array
+        listView.setAdapter(customAdapter); //puts in values
 
 
         return rootView;
@@ -83,17 +86,16 @@ public class ShowScoresQuestionsFragment extends Fragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            String currentQuestion = (String) getItem(position);
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_list_view, null);
             }
-
 
             TextView qView = (TextView) convertView.findViewById(R.id.show_question);
             Button googleButton = (Button) convertView.findViewById(R.id.googleSearchButton);
 
             String quAnTemp = "Question: " + Trivia.questionList.get(position) + "\n\nAnswer: " + Trivia.correctList.get(position);
-            if (!Trivia.rightOrWring.get(position)){
+
+            if (!Trivia.rightOrWring.get(position)){ //sets background color based on whether user chose the right answer or wrong answer
                 quAnTemp+="\nYou Chose: " + Trivia.youChose.get(position);
                 convertView.setBackgroundColor(getResources().getColor(R.color.red_wrong));
             }
@@ -106,7 +108,8 @@ public class ShowScoresQuestionsFragment extends Fragment {
             tempQuestion.replaceAll("&", "+");
             final String url = "http://www.google.com/search?q="+tempQuestion;
             Log.d(TAG, url);
-            googleButton.setOnClickListener(new View.OnClickListener() {
+
+            googleButton.setOnClickListener(new View.OnClickListener() { //event listener that takes user to google web broswer and googles the question
                 @Override
                 public void onClick(View v) {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));

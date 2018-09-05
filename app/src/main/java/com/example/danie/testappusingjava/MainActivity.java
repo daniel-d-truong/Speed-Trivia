@@ -30,13 +30,14 @@ public class MainActivity extends AppCompatActivity {
 //        parseJSON.parse();
 
 
+        //CREATES bottom navigation view
         toolbar = getSupportActionBar();
         BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.navigationView);
         final BlankFragment homeFragment = new BlankFragment();
         final QuizFragment triviaFragment = new QuizFragment();
         final AccountFragment settingsFragment = new AccountFragment();
 
-        if(savedInstanceState == null) {
+        if(savedInstanceState == null) { //if it is the first time loading the activity, set default fragment to HOME
             getSupportFragmentManager().
                     beginTransaction().replace(R.id.container,homeFragment).commit();
         }
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 //        transaction.replace(R.id.container, homeFragment);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) { //event listener for changing navigationmenu
                 Log.d(TAG, menuItem.getTitle()+" has been selected.");
                 Fragment selectedFragment = null;
                 switch (menuItem.getItemId()){

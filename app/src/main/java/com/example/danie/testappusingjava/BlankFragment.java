@@ -17,6 +17,8 @@ import java.util.HashMap;
 
 import static android.support.constraint.Constraints.TAG;
 
+
+//THIS IS THE HOMEFRAGMENT
 public class BlankFragment extends Fragment {
 
     public static HashMap<Integer, HashMap<String, String>> hmap = new HashMap<Integer, HashMap<String, String>>(); //will be edited by other java code
@@ -36,7 +38,7 @@ public class BlankFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.fragment_home, container, false);
-        ListView listView = (ListView) rootView.findViewById(R.id.list_all_quiz_scores);
+        ListView listView = (ListView) rootView.findViewById(R.id.list_all_quiz_scores); //this selects the homeview listview
         if (listView == null){
             Log.d(TAG, "onCreateView listView IS NULL");
         }
@@ -71,6 +73,8 @@ public class BlankFragment extends Fragment {
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_score_list_view, null);
             }
+
+            //uses the hashmap in order to set values in the custom_score_view xml
             convertView.setBackgroundColor(getResources().getColor(Integer.parseInt(hmap.get(position).get("colorBG"))));
             TextView scoreFraction = (TextView) convertView.findViewById(R.id.fraction);
             TextView scorePercent = (TextView) convertView.findViewById(R.id.percentTextView);

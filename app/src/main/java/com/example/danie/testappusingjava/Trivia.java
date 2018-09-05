@@ -35,7 +35,7 @@ public class Trivia extends Activity {
 
     private Button btn;
     private RadioGroup choices;
-    private int count = 0;
+    private int count = 0; //current question number
     public static int correct = 0;
     public static int incorrect = 0;
     private long estimatedTime; //in nano seconds
@@ -61,9 +61,8 @@ public class Trivia extends Activity {
     public static RadioButton choice3;
     public static RadioButton choice4;
 
-    public static String link = "https://opentdb.com/api.php?amount=10&type=multiple";
+    public static String link = "https://opentdb.com/api.php?amount=10&type=multiple"; //default url
     private RadioButton[] choicesList;
-    private LinearLayout showRecapLayout;
 
     FetchJSON process = new FetchJSON();
 
@@ -74,6 +73,7 @@ public class Trivia extends Activity {
         setContentView(R.layout.activity_trivia);
 
         //variables that select a View in the XML must be initiated AFTER the activity xml has been loaded
+        //resets ALL static variables for a new trivia activity
         correct = 0;
         incorrect = 0;
 
@@ -124,9 +124,9 @@ public class Trivia extends Activity {
                     checkAnswer(choices.getCheckedRadioButtonId());
                     count++;
                     if (count == total){
-//                        showResults();
-//                        showRecap();
-                        estimatedTime = System.nanoTime() - startTime;
+                        estimatedTime = System.nanoTime() - startTime; //total time it takes user to take quiz
+
+                        //converts the nanoseconds into 00:00 format
                         long totalSeconds = estimatedTime/1000000000;
                         minutes = (int) totalSeconds/60;
                         seconds = (int) totalSeconds%60;
@@ -137,6 +137,7 @@ public class Trivia extends Activity {
                             time+="0";
                         time+=seconds;
 
+                        //starts putting int values into homefragment hmap
                         BlankFragment.hmap.put(BlankFragment.count, new HashMap<String, String>());
                         BlankFragment.hmap.get(BlankFragment.count).put("categoryText", AccountFragment.category + " Category");
                         BlankFragment.hmap.get(BlankFragment.count).put("difficultyText", AccountFragment.difficult.toUpperCase() + " Difficulty");
@@ -144,6 +145,7 @@ public class Trivia extends Activity {
                         BlankFragment.hmap.get(BlankFragment.count).put("timeText", time);
                         openShowScoreActivity();
                     }
+
                     else{
                         changeQuestion();
                         changeChoices();
@@ -152,7 +154,7 @@ public class Trivia extends Activity {
                     }
 
                 }
-                else { //creates pop-up telling user to make a choice
+                else { //creates pop-up telling user to make a choice if they haven't chose an answer
                     Log.d(TAG, "Else Statement has been Run.");
                     //making a snackbar
                     Snackbar.make(findViewById(R.id.myLayout), R.string.make_choice, Snackbar.LENGTH_SHORT)
@@ -174,26 +176,10 @@ public class Trivia extends Activity {
         listView.setAdapter((ListAdapter) listView);
     }
 
-    private void showResults() {
-////        ConstraintLayout showScore = (ConstraintLayout) findViewById(R.id.showScoresLayout);
-//        TextView score = (TextView) findViewById(R.id.scores);
-//        if (score != null){
-//            Log.d(TAG, "Score is not null!");
-//        }
-//        else
-//            Log.d(TAG, "Score is null!");
-////        ConstraintLayout parent = (ConstraintLayout) findViewById(R.id.quizLayout);
-//
-//
-//        score.setText(correct+"/"+total);//fix this!!!
-////        showScore.setVisibility(View.VISIBLE);
-////        parent.setVisibility(View.GONE);
-        Log.d(TAG, "HI");
-
-    }
-
-    private void checkAnswer(int id) {
+    private void checkAnswer(int id) { //checks if user got it right
         RadioButton selected = (RadioButton) findViewById((id));
+
+        //increases correct and incorrect count based on whether user gets it right, also adds true or false to rightOrWring arraylist
         if (selected.getText() == correctList.get(count)){
             Log.d(TAG, "Correct answer!");
             correct+=1;
@@ -210,13 +196,6 @@ public class Trivia extends Activity {
     //changes the Question when button is clicked
     private void changeQuestion(){
         question.setText(questionList.get(count));
-//        count++;
-//
-//        TextView q = (TextView) findViewById(R.id.question2);
-//        String message = getString(R.string.question); //used to access the String resource
-//        message+=" "+count; //changes the message
-//
-//        q.setText(message);
     }
 
     //changes the Choices when button is clicked

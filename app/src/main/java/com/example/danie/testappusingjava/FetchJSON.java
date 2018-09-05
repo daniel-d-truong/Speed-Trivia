@@ -20,12 +20,14 @@ import java.util.HashMap;
 import static android.support.constraint.Constraints.TAG;
 
 public class FetchJSON extends AsyncTask<Void, Void, Void> {
-    String data = "";
+    String data = ""; //this variable represents the json data in form of a string
+
+    ///these arraylists will be used by trivia.class
     ArrayList<String> questionsList = new ArrayList<String>();
     ArrayList<String> answersList = new ArrayList<String>();
     ArrayList<String[]> incorrectList = new ArrayList<String[]>();
 
-    HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+    HashMap<String, Integer> hmap = new HashMap<String, Integer>(); //used for categories
 
     String singleParsed = "";
     String link = "https://opentdb.com/api.php?amount=10&type=multiple";
@@ -33,13 +35,15 @@ public class FetchJSON extends AsyncTask<Void, Void, Void> {
 
     public void setOriginate(int originate) {
         this.originate = originate;
-    }
+    } //determines whether to get json questinos or json categories
 
     @Override
     protected Void doInBackground(Void... voids) {
         try {
             Log.d(TAG, "Process working in background");
-            URL url = new URL(link);
+            URL url = new URL(link); //link passed in by an activity
+
+            //creates url connectino to fetch the json from the url
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             InputStream inputStream = httpURLConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -48,21 +52,19 @@ public class FetchJSON extends AsyncTask<Void, Void, Void> {
                 line = bufferedReader.readLine();
 //                if (line != null && ! line.toLowerCase().contains("&")) {
                 data = data + line;
-////                }
-
             }
 
             JSONObject JA_temp = new JSONObject(data); //takes data and converts it into JSON
 
-            if (originate == 0){
+            if (originate == 0){ ///process used when fetching questions n choices
                 JSONArray JA = new JSONArray(JA_temp.getJSONArray("results").toString()); //MUST USE .toSTRING() TO PARSE CORRECTLY
                 Log.d(TAG, "The for loop is not running");
                 for(int i = 0; i < JA.length(); i++){
                     JSONObject JO = (JSONObject) JA.get(i);
-                    singleParsed = JO.getString("question");
-                    questionsList.add(singleParsed);
-
+                    questionsList.add(JO.getString("question"));
                     answersList.add(JO.getString("correct_answer"));
+
+                    //takes incorrect answers as an array
                     JSONArray tempJson = (JSONArray) JO.get("incorrect_answers");
                     String[] temp = new String[3];
                     for (int k = 0; k < tempJson.length(); k++){
@@ -70,26 +72,24 @@ public class FetchJSON extends AsyncTask<Void, Void, Void> {
                         temp[k] = x; Log.d(TAG, "This tempJson works: "+x);
                     }
                     incorrectList.add(temp);
-
-                    Log.d(TAG, "Parsed line" + singleParsed);
                 }
 
             }
 
-            else if (originate == 1){
+            else if (originate == 1){ //deals with fetching categoreis
                 JSONArray JA = new JSONArray(JA_temp.getJSONArray("trivia_categories").toString());
                 Log.d(TAG, "JSONArray " + JA);
                 for (int i = 0; i < JA.length(); i++){
                     JSONObject JO = (JSONObject) JA.get(i);
-                    hmap.put(JO.getString("name"), JO.getInt("id"));
+                    hmap.put(JO.getString("name"), JO.getInt("id")); //stores the name of the category with its id
                 }
 
-                if (hmap.get("General Knowledge") == null){
-                    Log.d(TAG, "HMAP NOT WORKING");
-                }
-                else{
-                    Log.d(TAG, "HMAP WORKS: " + hmap.get("General Knowledge"));
-                }
+//                if (hmap.get("General Knowledge") == null){
+//                    Log.d(TAG, "HMAP NOT WORKING");
+//                }
+//                else{
+//                    Log.d(TAG, "HMAP WORKS: " + hmap.get("General Knowledge"));
+//                }
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -112,6 +112,8 @@ public class FetchJSON extends AsyncTask<Void, Void, Void> {
 //            e.printStackTrace();
 //        }
         Log.d(TAG, data);
+
+        //sets initial question n answer
         if (originate == 0){
             Trivia.question.setText(questionsList.get(0));
             Trivia.choice1.setText(answersList.get(0));

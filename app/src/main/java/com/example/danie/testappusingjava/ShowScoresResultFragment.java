@@ -38,7 +38,10 @@ public class ShowScoresResultFragment extends Fragment {
         result.setText((Trivia.correct) + "/"+ (Trivia.total));
         timeResult.setText(Trivia.time);
         resultPercent.setText(Integer.toString(percent)+"%");
+
         int colorID ;
+
+        //depending on users score, changes the background color of score box
         if (percent < 50){
             colorID=R.color.red_wrong;
         }
@@ -48,10 +51,12 @@ public class ShowScoresResultFragment extends Fragment {
         else {
             colorID=R.color.green;
         }
+
+        //adds value into homefragment hmap in order to put into the customscoreview xml
         BlankFragment.hmap.get(BlankFragment.count).put("scoreFraction", Trivia.correct + "/" + Trivia.total); //adds to blankfragment hmap
         BlankFragment.hmap.get(BlankFragment.count).put("scorePercent", percent+"%");
         BlankFragment.hmap.get(BlankFragment.count).put("colorBG", Integer.toString(colorID));//adds to blankfragment hmap
-        BlankFragment.count++;
+        BlankFragment.count++; //this is the last key-value pair put into the hmap so count increases
 
         return rootView;
     }

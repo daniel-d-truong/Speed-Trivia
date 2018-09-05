@@ -148,6 +148,8 @@ public class ShowScoresActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
 
             Fragment fragment = null;
+
+            //changes fragment based on what user selects
             switch (position){
                 case 0:
                     fragment = new ShowScoresResultFragment();
@@ -165,7 +167,7 @@ public class ShowScoresActivity extends AppCompatActivity {
         }
 
         @Override
-        public int getCount() {
+        public int getCount() { //tells how many tabs to show
             // Show 2 total pages.
             return 2;
         }
