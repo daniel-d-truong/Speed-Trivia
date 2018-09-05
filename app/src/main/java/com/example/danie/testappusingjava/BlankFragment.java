@@ -71,6 +71,7 @@ public class BlankFragment extends Fragment {
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_score_list_view, null);
             }
+            convertView.setBackgroundColor(getResources().getColor(Integer.parseInt(hmap.get(position).get("colorBG"))));
             TextView scoreFraction = (TextView) convertView.findViewById(R.id.fraction);
             TextView scorePercent = (TextView) convertView.findViewById(R.id.percentTextView);
             TextView categoryText = (TextView) convertView.findViewById(R.id.categoryText);
@@ -84,8 +85,7 @@ public class BlankFragment extends Fragment {
             difficultyText.setText(hmap.get(position).get("difficultyText"));
             numqText.setText(hmap.get(position).get("numqText"));
             timeText.setText(hmap.get(position).get("timeText"));
-
-
+            
             return convertView;
         }
     }

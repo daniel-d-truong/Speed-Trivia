@@ -38,9 +38,19 @@ public class ShowScoresResultFragment extends Fragment {
         result.setText((Trivia.correct) + "/"+ (Trivia.total));
         timeResult.setText(Trivia.time);
         resultPercent.setText(Integer.toString(percent)+"%");
-
+        int colorID ;
+        if (percent < 50){
+            colorID=R.color.red_wrong;
+        }
+        else if (percent < 80){
+            colorID=R.color.green;
+        }
+        else {
+            colorID=R.color.orange;
+        }
         BlankFragment.hmap.get(BlankFragment.count).put("scoreFraction", Trivia.correct + "/" + Trivia.total); //adds to blankfragment hmap
-        BlankFragment.hmap.get(BlankFragment.count).put("scorePercent", percent+"%"); //adds to blankfragment hmap
+        BlankFragment.hmap.get(BlankFragment.count).put("scorePercent", percent+"%");
+        BlankFragment.hmap.get(BlankFragment.count).put("colorBG", Integer.toString(colorID));//adds to blankfragment hmap
         BlankFragment.count++;
 
         return rootView;
