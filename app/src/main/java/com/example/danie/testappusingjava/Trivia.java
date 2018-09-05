@@ -38,6 +38,10 @@ public class Trivia extends Activity {
     private int count = 0;
     public static int correct = 0;
     public static int incorrect = 0;
+    private long estimatedTime; //in nano seconds
+    private int minutes;
+    private int seconds;
+    public static String time = "";
 
     public static void setTotal(int total) {
         Trivia.total = total;
@@ -89,6 +93,8 @@ public class Trivia extends Activity {
         process.setOriginate(0);
         process.execute();
 
+        final long startTime = System.nanoTime();
+
         questionList = process.getQuestionsList();
         correctList = process.getAnswersList();
         incorrectList = process.getIncorrectList();
@@ -118,10 +124,22 @@ public class Trivia extends Activity {
                     if (count == total){
 //                        showResults();
 //                        showRecap();
+                        estimatedTime = System.nanoTime() - startTime;
+                        long totalSeconds = estimatedTime/1000000000;
+                        minutes = (int) totalSeconds/60;
+                        seconds = (int) totalSeconds%60;
+                        if (minutes == 0)
+                            time+="0";
+                        time+=minutes+":";
+                        if (seconds < 10)
+                            time+="0";
+                        time+=seconds;
+
                         BlankFragment.hmap.put(BlankFragment.count, new HashMap<String, String>());
                         BlankFragment.hmap.get(BlankFragment.count).put("categoryText", AccountFragment.category + " Category");
                         BlankFragment.hmap.get(BlankFragment.count).put("difficultyText", AccountFragment.difficult.toUpperCase() + " Difficulty");
                         BlankFragment.hmap.get(BlankFragment.count).put("numqText", total + " Questions");
+                        BlankFragment.hmap.get(BlankFragment.count).put("timeText", time);
                         openShowScoreActivity();
                     }
                     else{

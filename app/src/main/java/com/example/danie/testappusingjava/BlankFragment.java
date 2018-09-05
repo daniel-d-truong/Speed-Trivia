@@ -72,16 +72,18 @@ public class BlankFragment extends Fragment {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_score_list_view, null);
             }
             TextView scoreFraction = (TextView) convertView.findViewById(R.id.fraction);
-            TextView scorePercent = (TextView) convertView.findViewById(R.id.percentTextView2);
+            TextView scorePercent = (TextView) convertView.findViewById(R.id.percentTextView);
             TextView categoryText = (TextView) convertView.findViewById(R.id.categoryText);
             TextView difficultyText = (TextView) convertView.findViewById(R.id.difficultyText);
             TextView numqText = (TextView) convertView.findViewById(R.id.num_questions_text);
+            TextView timeText = (TextView) convertView.findViewById(R.id.timeHomeView);
 
             scoreFraction.setText(hmap.get(position).get("scoreFraction"));
             scorePercent.setText(hmap.get(position).get("scorePercent"));
             categoryText.setText(hmap.get(position).get("categoryText"));
             difficultyText.setText(hmap.get(position).get("difficultyText"));
             numqText.setText(hmap.get(position).get("numqText"));
+            timeText.setText(hmap.get(position).get("timeText"));
 
 
             return convertView;
