@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/custom_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/show_question"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -32,4 +31,14 @@
         android:layout_marginTop="74dp"
         android:text="You Chose: "
         android:visibility="gone" />
+
+    <Button
+        android:id="@+id/googleSearchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/show_question"
+        android:layout_marginEnd="0dp"
+        android:text="LEARN MORE"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
 </RelativeLayout>

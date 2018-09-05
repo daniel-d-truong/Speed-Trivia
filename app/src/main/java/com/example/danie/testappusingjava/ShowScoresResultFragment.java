@@ -43,10 +43,10 @@ public class ShowScoresResultFragment extends Fragment {
             colorID=R.color.red_wrong;
         }
         else if (percent < 80){
-            colorID=R.color.green;
+            colorID=R.color.orange;
         }
         else {
-            colorID=R.color.orange;
+            colorID=R.color.green;
         }
         BlankFragment.hmap.get(BlankFragment.count).put("scoreFraction", Trivia.correct + "/" + Trivia.total); //adds to blankfragment hmap
         BlankFragment.hmap.get(BlankFragment.count).put("scorePercent", percent+"%");
