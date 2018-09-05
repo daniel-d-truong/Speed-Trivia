@@ -119,15 +119,24 @@ public class AccountFragment extends Fragment {
             public void onClick(View v) { //
 
                 EditText temp = (EditText) rootView.findViewById(R.id.editText);
-                count = Integer.parseInt(temp.getText().toString()); //count is the number of total questions
+                count = Integer.parseInt(temp.getText().toString());
+                if (count > 50){
+                    //count is the number of total questions
+                    Snackbar.make(rootView.findViewById(R.id.settingsLayout), "ERROR. Number of Questions cannot go over 50.", Snackbar.LENGTH_SHORT)
+                            .show(); //myLayout refers to the trivia activity layout
+                }
 
-                category = tempCategory; //the actual category is now changed to what the user set it to before
+                else{
+                    category = tempCategory; //the actual category is now changed to what the user set it to before
 
-                changeLink(); //changes the link based on new values
-                Trivia.total = count; //trivia activity now knows that there is a new total amount of questinos
-                Log.d(TAG, "Trivia.total = " +Trivia.total);
-                Snackbar.make(rootView.findViewById(R.id.settingsLayout), R.string.link_success, Snackbar.LENGTH_SHORT)
-                        .show(); //myLayout refers to the trivia activity layout
+                    changeLink(); //changes the link based on new values
+                    Trivia.total = count; //trivia activity now knows that there is a new total amount of questinos
+                    Log.d(TAG, "Trivia.total = " +Trivia.total);
+                    Snackbar.make(rootView.findViewById(R.id.settingsLayout), R.string.link_success, Snackbar.LENGTH_SHORT)
+                            .show(); //myLayout refers to the trivia activity layout
+                }
+
+
             }
         });
 
