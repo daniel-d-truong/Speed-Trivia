@@ -32,9 +32,9 @@ public class ShowScoresResultFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_show_scores_result, container, false);
         TextView result = (TextView) rootView.findViewById(R.id.scores);
         result.setText((Trivia.correct) + "/"+ (Trivia.total));
-        long percent = Math.round(Trivia.correct/Trivia.total);
+        int percent = (int) Math.round((double) (Trivia.correct)/(Trivia.total)*100);
         BlankFragment.hmap.get(BlankFragment.count).put("scoreFraction", Trivia.correct + "/" + Trivia.total); //adds to blankfragment hmap
-        BlankFragment.hmap.get(BlankFragment.count).put("scorePercent", percent+""); //adds to blankfragment hmap
+        BlankFragment.hmap.get(BlankFragment.count).put("scorePercent", percent+"%"); //adds to blankfragment hmap
         BlankFragment.count++;
 
         return rootView;
