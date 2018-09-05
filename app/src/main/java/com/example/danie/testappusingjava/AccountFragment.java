@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -15,6 +16,11 @@ import java.util.HashMap;
 import static android.support.constraint.Constraints.TAG;
 
 public class AccountFragment extends Fragment {
+
+    String link = "https://opentdb.com/api.php?amount=10";
+    boolean jsonFlag = false;
+    int categoryID = 0;
+
     public static AccountFragment newInstance() {
         AccountFragment fragment = new AccountFragment();
         return fragment;
@@ -24,28 +30,28 @@ public class AccountFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        openShowScoreActivity();
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_account, container, false);
+
+        //try to make this process only occur once
         FetchJSON process = new FetchJSON();
         process.setOriginate(1);
         process.setLink("https://opentdb.com/api_category.php");
         process.execute();
         try {
-            Thread.sleep(750);
+            Thread.sleep(800);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        HashMap<String, Integer> hmap = process.getHmap(); //PROBLEM: returned an empy HMAP, SOLUTION: use Thread.sleep to wait to retreive JSON
+        final HashMap<String, Integer> hmap = process.getHmap(); //PROBLEM: returned an empy HMAP, SOLUTION: use Thread.sleep to wait to retreive JSON
 
         Log.d(TAG, "Size of Hmap: " + hmap.size());
-        String[] categories = new String[hmap.size()+1];
+        final String[] categories = new String[hmap.size()+1];
         int index = 0;
         categories[index] = "All"; //make sure to account for this
         for (String key: hmap.keySet()){
@@ -61,10 +67,26 @@ public class AccountFragment extends Fragment {
         Spinner categoriesSpinner = (Spinner) rootView.findViewById(R.id.category_spinner);
         adaptSpinner(categories, categoriesSpinner);
 
-        String[] difficulty = {"easy", "medium", "hard"};
+        String[] difficulty = {"all", "easy", "medium", "hard"};
         Spinner difficultySpinner = (Spinner) rootView.findViewById(R.id.difficulty_spinner);
         adaptSpinner(difficulty, difficultySpinner);
 
+        AdapterView.OnItemSelectedListener categorySelectListener = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position != 0){
+                    categoryID = hmap.get(categories[position]);
+                }
+                else if(position == 0){
+                    categoryID = 0;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        };
         return rootView;
     }
 
