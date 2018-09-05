@@ -53,7 +53,7 @@ public class BlankFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return Trivia.total;
+            return hmap.size();
         }
 
         @Override
