@@ -43,7 +43,7 @@ public class AccountFragment extends Fragment {
         process.setLink("https://opentdb.com/api_category.php");
         process.execute();
         try {
-            Thread.sleep(800);
+            Thread.sleep(900);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

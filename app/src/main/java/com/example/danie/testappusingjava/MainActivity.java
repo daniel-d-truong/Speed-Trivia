@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = getSupportActionBar();
         BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.navigationView);
+        final BlankFragment homeFragment = new BlankFragment();
+        final QuizFragment triviaFragment = new QuizFragment();
+        final AccountFragment settingsFragment = new AccountFragment();
 
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -40,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
                 Fragment selectedFragment = null;
                 switch (menuItem.getItemId()){
                     case R.id.navigation_home:
-                        selectedFragment = new BlankFragment();
+                        selectedFragment = homeFragment;
                         break;
                     case R.id.navigation_quiz:
-                        selectedFragment = new QuizFragment();
+                        selectedFragment = triviaFragment;
                         break;
                     case R.id.navigation_account:
-                        selectedFragment = new AccountFragment();
+                        selectedFragment = settingsFragment;
                         break;
 
                 }
