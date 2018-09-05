@@ -5,6 +5,14 @@
     android:orientation="vertical"
     >
 
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:text="See Your Previous Quiz Scores Here!"
+        android:textAlignment="center" />
+
     <ListView
         android:id="@+id/list_all_quiz_scores"
         android:layout_width="wrap_content"

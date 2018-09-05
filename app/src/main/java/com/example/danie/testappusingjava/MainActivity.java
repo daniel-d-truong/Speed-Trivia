@@ -36,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
         final QuizFragment triviaFragment = new QuizFragment();
         final AccountFragment settingsFragment = new AccountFragment();
 
+        if(savedInstanceState == null) {
+            getSupportFragmentManager().
+                    beginTransaction().replace(R.id.container,homeFragment).commit();
+        }
+
+//        transaction.replace(R.id.container, homeFragment);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
