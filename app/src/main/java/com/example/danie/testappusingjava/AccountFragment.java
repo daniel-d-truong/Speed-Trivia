@@ -1,6 +1,7 @@
 package com.example.danie.testappusingjava;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_account, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_account, container, false);
         int tempCategoryID = 0;
 
         //try to make this process only occur once
@@ -110,7 +112,14 @@ public class AccountFragment extends Fragment {
         applyChangesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                EditText temp = (EditText) rootView.findViewById(R.id.editText);
+                count = Integer.parseInt(temp.getText().toString());
                 changeLink();
+                Trivia.total = count;
+                Log.d(TAG, "Trivia.total = " +Trivia.total);
+                Snackbar.make(rootView.findViewById(R.id.settingsLayout), R.string.link_success, Snackbar.LENGTH_SHORT)
+                        .show(); //myLayout refers to the trivia activity layout
             }
         });
 

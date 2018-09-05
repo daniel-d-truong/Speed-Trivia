@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/num_questions_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/categoryText"
+        android:layout_below="@+id/difficultyText"
+        android:text="100%"
+        android:textSize="16sp"
+        tools:text="10 Questions" />
+
+    <TextView
+        android:id="@+id/difficultyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/categoryText"
+        android:layout_below="@+id/categoryText"
+        android:text="EASY difficulty"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/categoryText"
+        android:layout_width="228dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/fraction"
+        android:layout_marginStart="145dp"
+        android:text="General Knowledge"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/percentTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/fraction"
+        android:layout_below="@+id/fraction"
+        android:text="100%"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/fraction"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="28dp"
+        android:text="1/10"
+        android:textSize="35sp" />
+</RelativeLayout>

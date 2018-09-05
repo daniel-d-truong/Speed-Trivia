@@ -1,11 +1,22 @@
 package com.example.danie.testappusingjava;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BlankFragment extends Fragment {
+
+    public static HashMap<Integer, HashMap<String, String>> hmap = new HashMap<Integer, HashMap<String, String>>(); //will be edited by other java code
+    public static int count = 0; //will be edited by other java files
+
     public static BlankFragment newInstance() {
         BlankFragment fragment = new BlankFragment();
         return fragment;
@@ -21,4 +32,50 @@ public class BlankFragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
+
+
+
+    class CustomAdapter extends ArrayAdapter {
+
+        public CustomAdapter(@NonNull Context context, ArrayList<String> questions) {
+            super(context, 0, questions);
+        }
+
+        @Override
+        public int getCount() {
+            return Trivia.total;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_score_list_view, null);
+            }
+            TextView scoreFraction = (TextView) convertView.findViewById(R.id.fraction);
+            TextView scorePercent = (TextView) convertView.findViewById(R.id.percentTextView2);
+            TextView categoryText = (TextView) convertView.findViewById(R.id.categoryText);
+            TextView difficultyText = (TextView) convertView.findViewById(R.id.difficultyText);
+            TextView numqText = (TextView) convertView.findViewById(R.id.num_questions_text);
+
+            scoreFraction.setText(hmap.get(position).get("scoreFraction"));
+            scorePercent.setText(hmap.get(position).get("scorePercent"));
+            categoryText.setText(hmap.get(position).get("categoryText"));
+            difficultyText.setText(hmap.get(position).get("difficultyText"));
+            numqText.setText(hmap.get(position).get("numqText"));
+
+
+            return convertView;
+        }
+    }
 }
+

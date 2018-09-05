@@ -23,6 +23,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.xml.namespace.QName;
 
@@ -37,6 +38,11 @@ public class Trivia extends Activity {
     private int count = 0;
     public static int correct = 0;
     public static int incorrect = 0;
+
+    public static void setTotal(int total) {
+        Trivia.total = total;
+    }
+
     public static int total = 10;
 
     public static ArrayList<String> questionList;
@@ -65,7 +71,7 @@ public class Trivia extends Activity {
         //variables that select a View in the XML must be initiated AFTER the activity xml has been loaded
         correct = 0;
         incorrect = 0;
-        total = 10;
+
         userChoseIncorrectsOnly = new ArrayList<String>();
         Log.d(TAG, link);
 
@@ -109,9 +115,10 @@ public class Trivia extends Activity {
                 if (choices.getCheckedRadioButtonId() != -1) { //when value is -1, that means no button has been selected
                     checkAnswer(choices.getCheckedRadioButtonId());
                     count++;
-                    if (count > 9){
+                    if (count > total){
 //                        showResults();
 //                        showRecap();
+                        BlankFragment.hmap.put(BlankFragment.count, new HashMap<String, String>());
                         openShowScoreActivity();
                     }
                     else{
@@ -126,7 +133,7 @@ public class Trivia extends Activity {
                     Log.d(TAG, "Else Statement has been Run.");
                     //making a snackbar
                     Snackbar.make(findViewById(R.id.myLayout), R.string.make_choice, Snackbar.LENGTH_SHORT)
-                            .show();
+                            .show(); //myLayout refers to the trivia activity layout
                 }
             }
         });
