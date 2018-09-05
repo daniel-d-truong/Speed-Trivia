@@ -52,7 +52,8 @@ public class Trivia extends Activity {
     public static ArrayList<String> questionList;
     public static ArrayList<String> correctList;
     public static ArrayList<String[]> incorrectList;
-    public static ArrayList<String> userChoseIncorrectsOnly;
+    public static ArrayList<String> youChose;
+    public static ArrayList<Boolean> rightOrWring;
 
     public static TextView question;
     public static RadioButton choice1;
@@ -76,7 +77,9 @@ public class Trivia extends Activity {
         correct = 0;
         incorrect = 0;
 
-        userChoseIncorrectsOnly = new ArrayList<String>();
+        rightOrWring = new ArrayList<Boolean>();
+        youChose = new ArrayList<String>();
+        time = "";
         Log.d(TAG, link);
 
         choices = (RadioGroup) findViewById (R.id.multiple_choice);
@@ -98,7 +101,6 @@ public class Trivia extends Activity {
         questionList = process.getQuestionsList();
         correctList = process.getAnswersList();
         incorrectList = process.getIncorrectList();
-        userChoseIncorrectsOnly = new ArrayList<String>();
         Log.d(TAG, "Trivia has been created");
 
         //set question to API
@@ -195,12 +197,14 @@ public class Trivia extends Activity {
         if (selected.getText() == correctList.get(count)){
             Log.d(TAG, "Correct answer!");
             correct+=1;
+            rightOrWring.add(true);
         }
         else{
             Log.d(TAG, "Incorrect answer! The correct answer is: " + correctList.get(count));
             incorrect+=1;
-            userChoseIncorrectsOnly.add((String) selected.getText());
+            rightOrWring.add(false);
         }
+        youChose.add((String) selected.getText());
     }
 
     //changes the Question when button is clicked

@@ -83,9 +83,17 @@ public class ShowScoresQuestionsFragment extends Fragment {
 
 
             TextView qView = (TextView) convertView.findViewById(R.id.show_question);
-            TextView aView = (TextView) convertView.findViewById(R.id.show_answer);
+            String quAnTemp = "Question: " + Trivia.questionList.get(position) + "\n\nAnswer: " + Trivia.correctList.get(position);
+            if (!Trivia.rightOrWring.get(position)){
+                quAnTemp+="\nYou Chose: " + Trivia.youChose.get(position);
+                convertView.setBackgroundColor(getResources().getColor(R.color.red_wrong));
+            }
+            else{
+                convertView.setBackgroundColor(getResources().getColor(R.color.green));
+            }
 
-            qView.setText("Question: " + Trivia.questionList.get(position) + "\nAnswer: " + Trivia.correctList.get(position));
+
+            qView.setText(quAnTemp);
 //            aView.setText("Answer: " + Trivia.correctList.get(position));
             return convertView;
         }

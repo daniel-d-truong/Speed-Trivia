@@ -39,7 +39,6 @@ public class ShowScoresActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
-    private ArrayList<String> userChose = Trivia.userChoseIncorrectsOnly;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

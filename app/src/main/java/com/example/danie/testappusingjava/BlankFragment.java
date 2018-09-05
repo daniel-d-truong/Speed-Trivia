@@ -85,7 +85,7 @@ public class BlankFragment extends Fragment {
             difficultyText.setText(hmap.get(position).get("difficultyText"));
             numqText.setText(hmap.get(position).get("numqText"));
             timeText.setText(hmap.get(position).get("timeText"));
-            
+
             return convertView;
         }
     }
