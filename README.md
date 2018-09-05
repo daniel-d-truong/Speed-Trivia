@@ -4,3 +4,7 @@
 <br> 
 
 <p> Technologies Used: Android Studios, <a href="https://opentdb.com/api_config.php"> Trivia API </a> </p> 
+
+<br> 
+
+<p> Android Studios was definitely a pain to learn. Thankfully, there were so many youtube videos that saved me and taught me a bunch of stuff, such as using buttons, listview, adapters, spinners, linearlayout, relativelayout, etc. </p> 
