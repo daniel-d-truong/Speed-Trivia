@@ -3,14 +3,19 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class BlankFragment extends Fragment {
 
@@ -30,16 +35,21 @@ public class BlankFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView =  inflater.inflate(R.layout.fragment_home, container, false);
+        ListView listView = (ListView) rootView.findViewById(R.id.list_all_quiz_scores);
+        if (listView == null){
+            Log.d(TAG, "onCreateView listView IS NULL");
+        }
+        else
+            Log.d(TAG, "onCreateView listView IS NOT NULL");
+        BlankFragment.CustomAdapter customAdapter = new BlankFragment.CustomAdapter();
+        listView.setAdapter(customAdapter);
+        return rootView;
     }
 
 
 
-    class CustomAdapter extends ArrayAdapter {
-
-        public CustomAdapter(@NonNull Context context, ArrayList<String> questions) {
-            super(context, 0, questions);
-        }
+    class CustomAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {

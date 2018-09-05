@@ -35,6 +35,8 @@ public class ShowScoresResultFragment extends Fragment {
         long percent = Math.round(Trivia.correct/Trivia.total);
         BlankFragment.hmap.get(BlankFragment.count).put("scoreFraction", Trivia.correct + "/" + Trivia.total); //adds to blankfragment hmap
         BlankFragment.hmap.get(BlankFragment.count).put("scorePercent", percent+""); //adds to blankfragment hmap
+        BlankFragment.count++;
+
         return rootView;
     }
 

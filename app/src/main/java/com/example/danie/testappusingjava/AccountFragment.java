@@ -23,8 +23,11 @@ public class AccountFragment extends Fragment {
     String link = "https://opentdb.com/api.php?amount=10";
     boolean jsonFlag = false;
     int categoryID = 0;
+    private String tempCategory = "All"; //before user selects apply changes
+    public static String category = "All";
+
+    public static String difficult = "all"; //use for blankfragment hmap AND link
     int count = 10;
-    String difficult = "all";
 
     public static AccountFragment newInstance() {
         AccountFragment fragment = new AccountFragment();
@@ -86,6 +89,7 @@ public class AccountFragment extends Fragment {
                 else if(position == 0){
                     categoryID = 0;
                 }
+                tempCategory = categories[position];
                 Log.d(TAG, "CategoryID: " + categoryID);
             }
 
@@ -115,6 +119,7 @@ public class AccountFragment extends Fragment {
 
                 EditText temp = (EditText) rootView.findViewById(R.id.editText);
                 count = Integer.parseInt(temp.getText().toString());
+                category = tempCategory;
                 changeLink();
                 Trivia.total = count;
                 Log.d(TAG, "Trivia.total = " +Trivia.total);

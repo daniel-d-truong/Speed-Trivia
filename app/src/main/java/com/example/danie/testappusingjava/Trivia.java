@@ -115,10 +115,13 @@ public class Trivia extends Activity {
                 if (choices.getCheckedRadioButtonId() != -1) { //when value is -1, that means no button has been selected
                     checkAnswer(choices.getCheckedRadioButtonId());
                     count++;
-                    if (count > total){
+                    if (count == total){
 //                        showResults();
 //                        showRecap();
                         BlankFragment.hmap.put(BlankFragment.count, new HashMap<String, String>());
+                        BlankFragment.hmap.get(BlankFragment.count).put("categoryText", AccountFragment.category + " Category");
+                        BlankFragment.hmap.get(BlankFragment.count).put("difficultyText", AccountFragment.difficult.toUpperCase() + " Difficulty");
+                        BlankFragment.hmap.get(BlankFragment.count).put("numqText", total + " Questions");
                         openShowScoreActivity();
                     }
                     else{
