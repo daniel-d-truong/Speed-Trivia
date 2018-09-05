@@ -49,6 +49,8 @@ public class Trivia extends Activity {
     public static RadioButton choice2;
     public static RadioButton choice3;
     public static RadioButton choice4;
+
+    public static String link = "https://opentdb.com/api.php?amount=10&type=multiple";
     private RadioButton[] choicesList;
     private LinearLayout showRecapLayout;
 
@@ -65,6 +67,7 @@ public class Trivia extends Activity {
         incorrect = 0;
         total = 10;
         userChoseIncorrectsOnly = new ArrayList<String>();
+        Log.d(TAG, link);
 
         choices = (RadioGroup) findViewById (R.id.multiple_choice);
         btn = (Button) findViewById(R.id.submit);
@@ -76,7 +79,7 @@ public class Trivia extends Activity {
         choicesList = new RadioButton[]{choice1, choice2, choice3, choice4};
 
 
-        process.setLink("https://opentdb.com/api.php?amount=10&type=multiple");
+        process.setLink(link);
         process.setOriginate(0);
         process.execute();
 
@@ -95,7 +98,6 @@ public class Trivia extends Activity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 Log.d(TAG, "ON Click has been run");
                 btn.setBackgroundColor(getResources().getColor(R.color.buttonColor)); //sets background color to what is set in the colors.xml
-
             }
         });
 
@@ -214,6 +216,10 @@ public class Trivia extends Activity {
         Intent in = new Intent (this, ShowScoresActivity.class); //must create an Intent object
         in.putExtra("score", correct+"/"+total);
         startActivity(in); //pass the Intent object into the startActivity(Intent) class in order to actually start the activity
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
 

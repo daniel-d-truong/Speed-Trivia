@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ public class AccountFragment extends Fragment {
     String link = "https://opentdb.com/api.php?amount=10";
     boolean jsonFlag = false;
     int categoryID = 0;
+    int count = 10;
+    String difficult = "all";
 
     public static AccountFragment newInstance() {
         AccountFragment fragment = new AccountFragment();
@@ -36,6 +39,7 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_account, container, false);
+        int tempCategoryID = 0;
 
         //try to make this process only occur once
         FetchJSON process = new FetchJSON();
@@ -67,11 +71,11 @@ public class AccountFragment extends Fragment {
         Spinner categoriesSpinner = (Spinner) rootView.findViewById(R.id.category_spinner);
         adaptSpinner(categories, categoriesSpinner);
 
-        String[] difficulty = {"all", "easy", "medium", "hard"};
+        final String[] difficulty = {"all", "easy", "medium", "hard"};
         Spinner difficultySpinner = (Spinner) rootView.findViewById(R.id.difficulty_spinner);
         adaptSpinner(difficulty, difficultySpinner);
 
-        AdapterView.OnItemSelectedListener categorySelectListener = new AdapterView.OnItemSelectedListener() {
+        categoriesSpinner.setOnItemSelectedListener (new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position != 0){
@@ -80,14 +84,49 @@ public class AccountFragment extends Fragment {
                 else if(position == 0){
                     categoryID = 0;
                 }
+                Log.d(TAG, "CategoryID: " + categoryID);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        };
+        });
+
+        difficultySpinner.setOnItemSelectedListener (new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                difficult = difficulty[position];
+                Log.d(TAG, "Difficulty: " + position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        Button applyChangesButton = (Button) rootView.findViewById(R.id.change_url_button);
+        applyChangesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeLink();
+            }
+        });
+
+
         return rootView;
+    }
+
+    private void changeLink() {
+        link = "https://opentdb.com/api.php?type=multiple&amount="+count;
+        if (categoryID != 0){
+            link+="&category="+categoryID;
+        }
+        if (difficult.equals("all") == false){
+            link+="&difficulty="+difficult;
+        }
+        Trivia.link = link;
     }
 
     private void adaptSpinner(String[] array, Spinner spinner) {
