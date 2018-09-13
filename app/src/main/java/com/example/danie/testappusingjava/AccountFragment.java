@@ -136,7 +136,6 @@ public class AccountFragment extends Fragment {
                             .show(); //myLayout refers to the trivia activity layout
                 }
 
-
             }
         });
 

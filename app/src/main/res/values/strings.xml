@@ -27,5 +27,6 @@
     <string name="title_activity_show_scores">ShowScoresActivity</string>
     <string name="tab_text_1">Results</string>
     <string name="tab_text_2">Questions/Answers</string>
+    <string name="fail_to_access"> Unable to Establish a Connection, Make Sure You Have Access To Internet </string>
 
 </resources>
