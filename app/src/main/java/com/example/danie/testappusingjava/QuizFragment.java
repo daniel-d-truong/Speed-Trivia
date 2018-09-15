@@ -46,9 +46,9 @@ public class QuizFragment extends Fragment {
                 try {
                     Process proc = runtime.exec("ping " + Trivia.link);
                     Log.d(TAG, "executing Runtime");
-                    int mPingResult = proc.waitFor();
+                    int mPingResult = proc.waitFor(); //returns 0 if the process was terminated 
                     Log.d(TAG, "finished waiting for proc");
-                    if (mPingResult == 0){
+                    if (mPingResult != 0){
                         openTriviaActivity();
                     }
                     else{
