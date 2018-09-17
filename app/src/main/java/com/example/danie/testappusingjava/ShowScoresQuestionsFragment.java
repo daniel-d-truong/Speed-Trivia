@@ -120,7 +120,7 @@ public class ShowScoresQuestionsFragment extends Fragment {
             });
 
 
-            qView.setText(decode(quAnTemp));
+            qView.setText(decodeHTML(quAnTemp));
 //            aView.setText("Answer: " + Trivia.correctList.get(position));
             return convertView;
         }
