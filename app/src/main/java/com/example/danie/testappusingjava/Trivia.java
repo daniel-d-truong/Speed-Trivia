@@ -4,10 +4,12 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -195,7 +197,7 @@ public class Trivia extends Activity {
 
     //changes the Question when button is clicked
     private void changeQuestion(){
-        question.setText(questionList.get(count));
+        question.setText(decodeHTML(questionList.get(count)));
     }
 
     //changes the Choices when button is clicked
@@ -206,15 +208,26 @@ public class Trivia extends Activity {
         for (int i = 0; i < 4; i ++){
             RadioButton temp = choicesList[i];
             if (i == correctIndex){
-                temp.setText(correctList.get(count));
+                temp.setText(decodeHTML(correctList.get(count)));
             }
             else{
-                temp.setText(incorrects[index]);
+                temp.setText(decodeHTML(incorrects[index]));
                 index+=1;
             }
 
         }
 
+    }
+
+    private String decodeHTML(String line){
+        if (Build.VERSION.SDK_INT >= 24)
+        {
+            return (Html.fromHtml(line , Html.FROM_HTML_MODE_LEGACY).toString());
+        }
+        else
+        {
+            return (Html.fromHtml(line).toString());
+        }
     }
 
     //resets the question layout

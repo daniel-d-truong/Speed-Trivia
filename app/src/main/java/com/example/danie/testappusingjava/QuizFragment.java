@@ -38,6 +38,8 @@ public class QuizFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_quiz, container, false);
         //OnClickListener for when user taps the button
         btn = (Button) rootView.findViewById(R.id.button_quiz);
+//        String test = "sHalos";
+//        Log.d(TAG, "Test: " + test.replaceAll("s", "\""));
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -46,7 +48,7 @@ public class QuizFragment extends Fragment {
                 try {
                     Process proc = runtime.exec("ping " + Trivia.link);
                     Log.d(TAG, "executing Runtime");
-                    int mPingResult = proc.waitFor(); //returns 0 if the process was terminated 
+                    int mPingResult = proc.waitFor(); //returns 0 if the process was terminated
                     Log.d(TAG, "finished waiting for proc");
                     if (mPingResult != 0){
                         openTriviaActivity();

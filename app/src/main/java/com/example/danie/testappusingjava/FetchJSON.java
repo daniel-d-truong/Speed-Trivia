@@ -1,6 +1,8 @@
 package com.example.danie.testappusingjava;
 
 import android.os.AsyncTask;
+import android.os.Build;
+import android.text.Html;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -14,6 +16,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -49,9 +53,19 @@ public class FetchJSON extends AsyncTask<Void, Void, Void> {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String line = "";
             while(line != null){
-                line = bufferedReader.readLine();
-//                if (line != null && ! line.toLowerCase().contains("&")) {
-                data = data + line;
+                line = (String) bufferedReader.readLine();
+//                if (line != null){
+//                    String lines = line.replaceAll("&quot", "\"").replaceAll("&#039", "\'");
+//
+//                    data+=lines;
+//                }
+//                else{
+//                    data+=line;
+//                }
+//                if (line != null){
+//
+//                }
+                data+=line;
             }
 
             JSONObject JA_temp = new JSONObject(data); //takes data and converts it into JSON
@@ -115,13 +129,24 @@ public class FetchJSON extends AsyncTask<Void, Void, Void> {
 
         //sets initial question n answer
         if (originate == 0){
-            Trivia.question.setText(questionsList.get(0));
-            Trivia.choice1.setText(answersList.get(0));
-            Trivia.choice2.setText(incorrectList.get(0)[0]);
-            Trivia.choice3.setText(incorrectList.get(0)[1]);
-            Trivia.choice4.setText(incorrectList.get(0)[2]);
+            Trivia.question.setText(decodeHTML(questionsList.get(0)));
+            Trivia.choice1.setText(decodeHTML(answersList.get(0)));
+            Trivia.choice2.setText(decodeHTML(incorrectList.get(0)[0]));
+            Trivia.choice3.setText(decodeHTML(incorrectList.get(0)[1]));
+            Trivia.choice4.setText(decodeHTML(incorrectList.get(0)[2]));
         }
 
+    }
+
+    private String decodeHTML(String line){
+        if (Build.VERSION.SDK_INT >= 24)
+        {
+            return (Html.fromHtml(line , Html.FROM_HTML_MODE_LEGACY).toString());
+        }
+        else
+        {
+            return (Html.fromHtml(line).toString());
+        }
     }
 
     public ArrayList<String> getQuestionsList() {
