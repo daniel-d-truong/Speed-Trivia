@@ -5,10 +5,12 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -93,7 +95,7 @@ public class ShowScoresQuestionsFragment extends Fragment {
             TextView qView = (TextView) convertView.findViewById(R.id.show_question);
             Button googleButton = (Button) convertView.findViewById(R.id.googleSearchButton);
 
-            String quAnTemp = "Question: " + Trivia.questionList.get(position) + "\n\nAnswer: " + Trivia.correctList.get(position);
+            String quAnTemp = "Question: " + Trivia.questionList.get(position) + "\n\nAnswer: " + Trivia.correctList.get(position); //represents all 3 question, answer, and user chose in one
 
             if (!Trivia.rightOrWring.get(position)){ //sets background color based on whether user chose the right answer or wrong answer
                 quAnTemp+="\nYou Chose: " + Trivia.youChose.get(position);
@@ -118,9 +120,20 @@ public class ShowScoresQuestionsFragment extends Fragment {
             });
 
 
-            qView.setText(quAnTemp);
+            qView.setText(decode(quAnTemp));
 //            aView.setText("Answer: " + Trivia.correctList.get(position));
             return convertView;
+        }
+    }
+
+    private String decodeHTML(String line){
+        if (Build.VERSION.SDK_INT >= 24)
+        {
+            return (Html.fromHtml(line , Html.FROM_HTML_MODE_LEGACY).toString());
+        }
+        else
+        {
+            return (Html.fromHtml(line).toString());
         }
     }
 

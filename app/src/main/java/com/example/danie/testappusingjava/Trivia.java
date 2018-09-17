@@ -166,23 +166,13 @@ public class Trivia extends Activity {
         });
     }
 
-    private void showRecap() {
-        ListView listView = (ListView) findViewById(R.id.list_view);
-
-        if (listView == null)
-            Log.d(TAG, "listview is NULL");
-        else
-            Log.d(TAG, "listview is NOT NULL");
-//        CustomAdapter customAdapter = new CustomAdapter();
-        assert listView != null;
-        listView.setAdapter((ListAdapter) listView);
-    }
-
     private void checkAnswer(int id) { //checks if user got it right
         RadioButton selected = (RadioButton) findViewById((id));
 
         //increases correct and incorrect count based on whether user gets it right, also adds true or false to rightOrWring arraylist
-        if (selected.getText() == correctList.get(count)){
+        Log.d(TAG, "Answer Displayed: " + correctList.get(count));
+        Log.d(TAG, "Html.escapeHTML: " + Html.escapeHtml(selected.getText()));
+        if (Html.escapeHtml(selected.getText()).equals(correctList.get(count))){
             Log.d(TAG, "Correct answer!");
             correct+=1;
             rightOrWring.add(true);
