@@ -192,7 +192,8 @@ public class Trivia extends Activity {
 
     //changes the Choices when button is clicked
     private void changeChoices() {
-        int correctIndex = (int) Math.random()*4;
+        int correctIndex = (int) (Math.random()*4);
+        Log.d(TAG, "Randomly Chosen Index: " + correctIndex);
         String[] incorrects = incorrectList.get(count);
         int index = 0;
         for (int i = 0; i < 4; i ++){
