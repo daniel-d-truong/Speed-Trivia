@@ -1,11 +1,13 @@
 package com.example.danie.testappusingjava;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         //CREATES bottom navigation view
         toolbar = getSupportActionBar();
         BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.navigationView);
+        bottomNav.setBackgroundColor(Color.WHITE);
+
         final BlankFragment homeFragment = new BlankFragment();
         final QuizFragment triviaFragment = new QuizFragment();
         final AccountFragment settingsFragment = new AccountFragment();
@@ -69,6 +73,10 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+    }
+
+    private int fetchColor(int color){
+        return ContextCompat.getColor(this, color);
     }
 
 
